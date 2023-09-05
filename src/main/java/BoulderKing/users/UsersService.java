@@ -27,7 +27,7 @@ public class UsersService {
 		usersRepo.findByEmail(body.getEmail()).ifPresent(user -> {
 			throw new BadRequestException("L'email è già stata utilizzata");
 		});
-		User newUser = new User(body.getName(), body.getSurname(), body.getEmail(), body.getPassword());
+		User newUser = new User(body.getEmail(), body.getPassword());
 		return usersRepo.save(newUser);
 	}
 
@@ -44,8 +44,8 @@ public class UsersService {
 	public User findByIdAndUpdate(UUID id, UserRequestPayload body) throws NotFoundException {
 		User found = this.findById(id);
 		found.setEmail(body.getEmail());
-		found.setName(body.getName());
-		found.setSurname(body.getSurname());
+//		found.setName(body.getName());
+//		found.setSurname(body.getSurname());
 
 		return usersRepo.save(found);
 	}

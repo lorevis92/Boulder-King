@@ -1,5 +1,6 @@
 package BoulderKing.users;
 
+import java.time.LocalDate;
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -11,12 +12,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,27 +26,25 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @Data
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NoArgsConstructor
 @JsonIgnoreProperties({ "password", "accountNonExpired", "authorities", "credentialsNonExpired", "accountNonLocked" })
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
 	private UUID id;
-	private String name;
-
-	@Convert(converter = SurnameConverter.class)
-	private String surname;
 	@Column(nullable = false, unique = true)
 	private String email;
+//	private Immagine profilo;
+//	private Immagine copertina;
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	private LocalDate dataRegistrazione;
 
 
 
-	public User(String name, String surname, String email, String password) {
-		this.name = name;
-		this.surname = surname;
+	public User(String email, String password) {
 		this.email = email;
 		this.password = password;
 		this.role = Role.USER;
