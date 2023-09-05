@@ -1,10 +1,13 @@
 package BoulderKing.entities;
 
+import java.util.List;
+
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -21,8 +24,8 @@ public class Ente extends User{
 	String informazioni;
 	@Enumerated(EnumType.STRING)
 	TipoEnte tipoEnte;
-	
-//	private List<Evento> listaEventi;
+	@OneToMany(mappedBy = "ente")
+	private List<Evento> listaEventi;
 	
 	// Costruttore
 	public Ente(String nomeEnte, String numeroTelefono, String emailContatto, String indirizzo) {

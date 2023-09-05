@@ -1,7 +1,10 @@
 package BoulderKing.entities;
 
+import java.util.List;
+
 import BoulderKing.users.User;
 import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,17 +13,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Atleti extends User {
+public class Atleta extends User {
 	private String userName;
 	private String name;
 	private String surname;
 	private int posizioneClassifica;
 	private int puntiClassifica;
-
-//	private List<Evento> listaEventi;
+	@ManyToMany(mappedBy = "partecipanti")
+	private List<Evento> listaEventi;
 
 	// Costruttore
-	public Atleti(String userName, String name, String surname) {
+	public Atleta(String userName, String name, String surname) {
 		super();
 		this.userName = userName;
 		this.name = name;
