@@ -10,10 +10,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
-import BoulderKing.entities.Evento;
+import BoulderKing.entities.evento.Evento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -45,6 +46,7 @@ public class User implements UserDetails {
 	private int posizioneClassifica;
 	private int puntiClassifica;
 	@ManyToMany(mappedBy = "partecipanti")
+	@JsonManagedReference
 	private List<Evento> listaEventi;
 	private String password;
 	@Enumerated(EnumType.STRING)

@@ -1,7 +1,8 @@
-package BoulderKing.entities;
+package BoulderKing.entities.classifica;
 
 import java.util.UUID;
 
+import BoulderKing.entities.evento.Evento;
 import BoulderKing.entities.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

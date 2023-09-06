@@ -1,9 +1,12 @@
-package BoulderKing.entities;
+package BoulderKing.entities.evento;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import BoulderKing.entities.classifica.Classifica;
 import BoulderKing.entities.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,5 +38,6 @@ public class Evento {
 	private Classifica classifica;
 	@ManyToMany
 	@JoinTable(name = "evento_utente", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "atleta_id"))
+	@JsonBackReference
 	private List<User> partecipanti;
 }

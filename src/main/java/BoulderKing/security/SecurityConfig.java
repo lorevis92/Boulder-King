@@ -35,6 +35,8 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/auth/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/atleti/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/enti/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/eventi/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/classifica/**").permitAll());
 
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
