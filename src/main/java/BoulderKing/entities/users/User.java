@@ -11,15 +11,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
+import BoulderKing.entities.Evento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.InheritanceType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,7 +29,6 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "users")
 @Data
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @NoArgsConstructor
 @JsonIgnoreProperties({ "password", "accountNonExpired", "authorities", "credentialsNonExpired", "accountNonLocked" })
 public class User implements UserDetails {
@@ -38,12 +39,28 @@ public class User implements UserDetails {
 	private String email;
 //	private Immagine profilo;
 //	private Immagine copertina;
+	private String userName;
+	private String name;
+	private String surname;
+	private int posizioneClassifica;
+	private int puntiClassifica;
+	@ManyToMany(mappedBy = "partecipanti")
+	private List<Evento> listaEventi;
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Role role;
 	@Enumerated(EnumType.STRING)
 	private TipoUser tipoUser;
 	private LocalDate dataRegistrazione;
+	String nomeEnte;
+	String numeroTelefonico;
+	String emailContatto;
+	String indirizzo;
+	String informazioni;
+	@Enumerated(EnumType.STRING)
+	TipoEnte tipoEnte;
+	@OneToMany(mappedBy = "organizzatore")
+	private List<Evento> listaEventiOrganizzati;
 
 
 
@@ -56,11 +73,6 @@ public class User implements UserDetails {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		return List.of(new SimpleGrantedAuthority(role.name()));
-	}
-
-	@Override
-	public String getUsername() {
-		return this.email;
 	}
 
 	@Override
@@ -81,5 +93,11 @@ public class User implements UserDetails {
 	@Override
 	public boolean isEnabled() {
 		return true;
+	}
+
+	@Override
+	public String getUsername() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

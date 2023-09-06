@@ -9,6 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import BoulderKing.Enum.TipoUser;
+import BoulderKing.entities.atleti.payload.UserToAtletaPayload;
+import BoulderKing.entities.ente.payload.UserToEntePayload;
 import BoulderKing.entities.users.payloads.UserRequestPayload;
 import BoulderKing.exceptions.BadRequestException;
 import BoulderKing.exceptions.NotFoundException;
@@ -44,9 +47,30 @@ public class UsersService {
 	public User findByIdAndUpdate(UUID id, UserRequestPayload body) throws NotFoundException {
 		User found = this.findById(id);
 		found.setEmail(body.getEmail());
-//		found.setName(body.getName());
-//		found.setSurname(body.getSurname());
+		found.setPassword(body.getPassword());
+		return usersRepo.save(found);
+	}
 
+	// Update User to Atleta
+	public User findByIdAndUpdateToAtleta(UUID id, UserToAtletaPayload body) throws NotFoundException {
+		User found = this.findById(id);
+		found.setName(body.getName());
+		found.setSurname(body.getUserName());
+		found.setUserName(body.getUserName());
+		found.setTipoUser(TipoUser.ATLETA);
+		return usersRepo.save(found);
+	}
+
+	// Update User to Ente
+	public User findByIdAndUpdateToEnte(UUID id, UserToEntePayload body) throws NotFoundException {
+		User found = this.findById(id);
+		found.setNomeEnte(body.getNomeEnte());
+		found.setNumeroTelefonico(body.getTelefono());
+		found.setEmailContatto(body.getEmailContatto());
+		found.setIndirizzo(body.getIndirizzo());
+		found.setInformazioni(body.getInfo());
+		found.setTipoUser(TipoUser.ENTE);
+		found.setTipoEnte(body.getTipoEnte());
 		return usersRepo.save(found);
 	}
 

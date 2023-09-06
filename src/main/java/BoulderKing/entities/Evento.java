@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
-import BoulderKing.entities.atleta.Atleta;
+import BoulderKing.entities.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -28,12 +28,12 @@ public class Evento {
 	private String nomeEvento;
 	private String località;
 	@ManyToOne
-	private Ente ente;
+	private User organizzatore;
 	private int puntiEvento;
 	private LocalDate data;
 	@OneToOne(mappedBy = "evento")
 	private Classifica classifica;
 	@ManyToMany
-	@JoinTable(name = "evento_atleta", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "atleta_id"))
-	private List<Atleta> partecipanti;
+	@JoinTable(name = "evento_utente", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "atleta_id"))
+	private List<User> partecipanti;
 }

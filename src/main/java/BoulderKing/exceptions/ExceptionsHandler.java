@@ -65,4 +65,12 @@ public class ExceptionsHandler {
 		return new ErrorsPayload("Siamo spiacenti l'utente non è un atleta", new Date(), 2321);
 	}
 
+	@ExceptionHandler(NotEnteException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ErrorsPayload handleNotEnte(NotEnteException e) {
+		log.error(e.getMessage());
+		e.printStackTrace();
+		return new ErrorsPayload("Siamo spiacenti l'utente non è un ente", new Date(), 2321);
+	}
+
 }

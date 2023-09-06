@@ -1,4 +1,4 @@
-package BoulderKing.entities.atleta;
+package BoulderKing.entities.atleti;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -11,8 +11,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import BoulderKing.Enum.TipoUser;
-import BoulderKing.entities.atleta.payloads.AtletaRequestPayload;
-import BoulderKing.entities.atleta.payloads.AtletaUpdatePayload;
+import BoulderKing.entities.atleti.payload.AtletaPayload;
+import BoulderKing.entities.users.Role;
 import BoulderKing.entities.users.User;
 import BoulderKing.entities.users.UsersRepository;
 import BoulderKing.exceptions.BadRequestException;
@@ -28,17 +28,18 @@ public class AtletaService {
 		this.usersRepo = usersRepo;
 	}
 
-	public Atleta create(AtletaRequestPayload body) {
+	public User create(AtletaPayload body) {
 		// check if email already in use
 		usersRepo.findByEmail(body.getEmail()).ifPresent(atleta -> {
 			throw new BadRequestException("L'email è già stata utilizzata");
 		});
-		Atleta nuovoAtleta = new Atleta();
+		User nuovoAtleta = new User();
 		nuovoAtleta.setName(body.getName());
 		nuovoAtleta.setSurname(body.getSurName());
 		nuovoAtleta.setUserName(body.getUserName());
 		nuovoAtleta.setEmail(body.getEmail());
 		nuovoAtleta.setPassword(body.getPassword());
+		nuovoAtleta.setRole(Role.USER);
 		nuovoAtleta.setTipoUser(TipoUser.ATLETA);
 		return usersRepo.save(nuovoAtleta);
 	}
@@ -66,36 +67,17 @@ public class AtletaService {
 		}
 	}
 
-	// Ricerca atleta per Id e aggiorna le info
-//	public User findByIdAndUpdate(UUID id, AtletaUpdatePayload body) throws NotFoundException {
-//		User found = this.findById(id);
-//		found.setEmail(body.getEmail());
-//		found.setName(body.getName());
-//		found.setSurname(body.getSurname());
-//		found.setPassword(null);
-//		found.setUserName(null);
-//		found.setTipoUser(null);
-//		return usersRepo.save(found);
-//	}
 
-	public User findByIdAndUpdate(UUID id, AtletaUpdatePayload body) throws NotFoundException {
-		User user = this.findById(id);
+	public User findByIdAndUpdate(UUID id, AtletaPayload body) throws NotFoundException {
+		User atleta = this.findById(id);
 
-		if (user instanceof Atleta) {
-			Atleta atleta = (Atleta) user;
-			atleta.setEmail(body.getEmail());
-			atleta.setName(body.getName());
-			atleta.setSurname(body.getSurName());
-			atleta.setPassword(body.getPassword());
-			atleta.setUserName(body.getUserName());
-			atleta.setTipoUser(body.getTipoUser());
-			return usersRepo.save(atleta);
-		} else {
-			throw new NotAthletException(id);
-		}
+		atleta.setEmail(body.getEmail());
+		atleta.setName(body.getName());
+		atleta.setSurname(body.getSurName());
+		atleta.setPassword(body.getPassword());
+		atleta.setUserName(body.getUserName());
+		return usersRepo.save(atleta);
 	}
-
-
 
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
 		User found = this.findById(id);

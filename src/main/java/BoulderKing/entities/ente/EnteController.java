@@ -1,4 +1,4 @@
-package BoulderKing.entities.atleta;
+package BoulderKing.entities.ente;
 
 import java.util.UUID;
 
@@ -19,19 +19,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import BoulderKing.entities.atleta.payloads.AtletaRequestPayload;
-import BoulderKing.entities.atleta.payloads.AtletaUpdatePayload;
+import BoulderKing.entities.ente.payload.EntePayload;
+import BoulderKing.entities.ente.payload.EnteUpdatePayload;
+import BoulderKing.entities.ente.payload.UserToEntePayload;
 import BoulderKing.entities.users.User;
+import BoulderKing.entities.users.UsersService;
 
 @EnableMethodSecurity
 @RestController
-@RequestMapping("/atleti")
-public class AtletaController {
-	private final AtletaService atletaServ;
+@RequestMapping("/enti")
+public class EnteController {
+	private final EnteService enteServ;
+	private final UsersService userServ;
 
 	@Autowired
-	public AtletaController(AtletaService atletaServ) {
-		this.atletaServ = atletaServ;
+	public EnteController(EnteService enteServ, UsersService userServ) {
+		this.enteServ = enteServ;
+		this.userServ = userServ;
 	}
 
 	@Autowired
@@ -39,35 +43,39 @@ public class AtletaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Atleta saveUser(@RequestBody @Validated AtletaRequestPayload body) {
+	public User saveUser(@RequestBody @Validated EntePayload body) {
 		body.setPassword(bcrypt.encode(body.getPassword()));
-		body.setEmail(bcrypt.encode(body.getEmail()));
-		Atleta created = atletaServ.create(body);
+		User created = enteServ.create(body);
 		return created;
 	}
 
 	@GetMapping
 	// @PreAuthorize("hasAuthority('ADMIN')")
-	public Page<User> getAtleta(@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
-		return atletaServ.find(page, size, sortBy);
+	public Page<User> getEnte(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
+		return enteServ.find(page, size, sortBy);
 	}
-
-
 
 	@GetMapping("/{userId}")
 	public User findById(@PathVariable UUID userId) {
-		return atletaServ.findById(userId);
+		return enteServ.findById(userId);
 	}
 
 	@PutMapping("/{userId}")
-	public User updateUser(@PathVariable UUID userId, @RequestBody AtletaUpdatePayload body) {
-		return atletaServ.findByIdAndUpdate(userId, body);
+	public User updateUser(@PathVariable UUID userId, @RequestBody EnteUpdatePayload body) {
+		return enteServ.findByIdAndUpdate(userId, body);
 	}
 
 	@DeleteMapping("/{userId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteUser(@PathVariable UUID userId) {
-		atletaServ.findByIdAndDelete(userId);
+		enteServ.findByIdAndDelete(userId);
 	}
+
+	// Update User to Ente
+	@PutMapping("/trasformazione/{userId}")
+	public User updateUserToEnte(@PathVariable UUID userId, @RequestBody UserToEntePayload body) {
+		return userServ.findByIdAndUpdateToEnte(userId, body);
+	}
+
 }
