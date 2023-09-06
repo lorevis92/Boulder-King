@@ -8,13 +8,17 @@ import org.springframework.stereotype.Component;
 
 import com.github.javafaker.Faker;
 
-import BoulderKing.users.UsersService;
-import BoulderKing.users.payloads.UserRequestPayload;
+import BoulderKing.entities.users.UsersRepository;
+import BoulderKing.entities.users.UsersService;
+import BoulderKing.entities.users.payloads.UserRequestPayload;
 
 @Component
 public class UsersRunner implements CommandLineRunner {
 	@Autowired
 	UsersService usersServ;
+
+	@Autowired
+	UsersRepository usersRepo;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -29,6 +33,14 @@ public class UsersRunner implements CommandLineRunner {
 			UserRequestPayload user = new UserRequestPayload(email, password);
 //			usersServ.create(user);
 		}
+//		Atleta nuovoAtleta = new Atleta();
+//		nuovoAtleta.setName("Nome Atleta");
+//		nuovoAtleta.setSurname("Cognome Atleta");
+//		nuovoAtleta.setUserName("Username");
+//		nuovoAtleta.setEmail("eyeyeyd@example.com");
+//		nuovoAtleta.setPassword("Password");
+//		nuovoAtleta.setTipoUser(TipoUser.ATLETA);
+//		usersRepo.save(nuovoAtleta);
 
 	}
 

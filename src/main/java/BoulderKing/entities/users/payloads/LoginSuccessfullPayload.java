@@ -1,4 +1,4 @@
-package BoulderKing.users.payloads;
+package BoulderKing.entities.users.payloads;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

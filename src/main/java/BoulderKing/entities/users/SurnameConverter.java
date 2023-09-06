@@ -1,4 +1,4 @@
-package BoulderKing.users;
+package BoulderKing.entities.users;
 
 import java.security.Key;
 import java.util.Base64;

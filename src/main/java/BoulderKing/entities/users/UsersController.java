@@ -1,4 +1,4 @@
-package BoulderKing.users;
+package BoulderKing.entities.users;
 
 import java.util.UUID;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import BoulderKing.users.payloads.UserRequestPayload;
+import BoulderKing.entities.users.payloads.UserRequestPayload;
 
 @EnableMethodSecurity
 @RestController

@@ -3,7 +3,7 @@ package BoulderKing.entities;
 import java.util.List;
 
 import BoulderKing.Enum.TipoEnte;
-import BoulderKing.users.User;
+import BoulderKing.entities.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

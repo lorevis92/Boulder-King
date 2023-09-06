@@ -57,4 +57,12 @@ public class ExceptionsHandler {
 		return new ErrorsPayload("Errore generico, risolveremo il prima possibile", new Date(), 2321);
 	}
 
+	@ExceptionHandler(NotAthletException.class)
+	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+	public ErrorsPayload handleNotAthlet(NotAthletException e) {
+		log.error(e.getMessage());
+		e.printStackTrace();
+		return new ErrorsPayload("Siamo spiacenti l'utente non è un atleta", new Date(), 2321);
+	}
+
 }

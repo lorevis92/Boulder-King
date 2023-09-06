@@ -1,4 +1,4 @@
-package BoulderKing.users;
+package BoulderKing.entities.users;
 
 import java.util.UUID;
 
@@ -9,9 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import BoulderKing.entities.users.payloads.UserRequestPayload;
 import BoulderKing.exceptions.BadRequestException;
 import BoulderKing.exceptions.NotFoundException;
-import BoulderKing.users.payloads.UserRequestPayload;
 
 @Service
 public class UsersService {

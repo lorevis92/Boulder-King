@@ -10,9 +10,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import BoulderKing.entities.users.User;
+import BoulderKing.entities.users.UsersService;
 import BoulderKing.exceptions.UnauthorizedException;
-import BoulderKing.users.User;
-import BoulderKing.users.UsersService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

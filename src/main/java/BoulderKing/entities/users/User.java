@@ -1,4 +1,4 @@
-package BoulderKing.users;
+package BoulderKing.entities.users;
 
 import java.time.LocalDate;
 import java.util.Collection;
@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import BoulderKing.Enum.TipoUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -40,6 +41,8 @@ public class User implements UserDetails {
 	private String password;
 	@Enumerated(EnumType.STRING)
 	private Role role;
+	@Enumerated(EnumType.STRING)
+	private TipoUser tipoUser;
 	private LocalDate dataRegistrazione;
 
 

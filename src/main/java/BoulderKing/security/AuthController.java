@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import BoulderKing.entities.users.User;
+import BoulderKing.entities.users.UsersService;
+import BoulderKing.entities.users.payloads.LoginSuccessfullPayload;
+import BoulderKing.entities.users.payloads.UserLoginPayload;
+import BoulderKing.entities.users.payloads.UserRequestPayload;
 import BoulderKing.exceptions.UnauthorizedException;
-import BoulderKing.users.User;
-import BoulderKing.users.UsersService;
-import BoulderKing.users.payloads.LoginSuccessfullPayload;
-import BoulderKing.users.payloads.UserLoginPayload;
-import BoulderKing.users.payloads.UserRequestPayload;
 
 @RestController
 @RequestMapping("/auth")

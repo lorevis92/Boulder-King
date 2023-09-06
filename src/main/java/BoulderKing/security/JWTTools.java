@@ -5,8 +5,8 @@ import java.util.Date;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import BoulderKing.entities.users.User;
 import BoulderKing.exceptions.UnauthorizedException;
-import BoulderKing.users.User;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 

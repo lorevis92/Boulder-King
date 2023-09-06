@@ -1,8 +1,10 @@
-package BoulderKing.entities;
+package BoulderKing.entities.atleta;
 
 import java.util.List;
 
-import BoulderKing.users.User;
+import BoulderKing.Enum.TipoUser;
+import BoulderKing.entities.Evento;
+import BoulderKing.entities.users.User;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToMany;
 import lombok.Getter;
@@ -23,13 +25,14 @@ public class Atleta extends User {
 	private List<Evento> listaEventi;
 
 	// Costruttore
-	public Atleta(String userName, String name, String surname) {
+	public Atleta(String userName, String name, String surname, String mail, String password) {
 		super();
 		this.userName = userName;
 		this.name = name;
 		this.surname = surname;
 		this.posizioneClassifica = 0;
 		this.puntiClassifica = 0;
+		this.setTipoUser(TipoUser.ATLETA);
 		
 		
 	}
