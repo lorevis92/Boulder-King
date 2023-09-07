@@ -10,10 +10,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import BoulderKing.entities.classifica.payload.UpdateClassificaPayload;
 
 @EnableMethodSecurity
 @RestController
@@ -46,10 +50,10 @@ public class ClassificaController {
 
 	}
 
-//	@PutMapping("/{classificaId}")
-//	public Classifica updateUser(@PathVariable UUID classificaId, @RequestBody NewClassificaPayload body) {
-//		return classificaServ.findByIdAndUpdate(classificaId, body);
-//	}
+	@PutMapping("/{classificaId}")
+	public Classifica updateUser(@PathVariable UUID classificaId, @RequestBody UpdateClassificaPayload body) {
+		return classificaServ.findByIdAndUpdate(classificaId, body);
+	}
 
 	@DeleteMapping("/{classificaId}")
 	@ResponseStatus(HttpStatus.NO_CONTENT)

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import BoulderKing.entities.classifica.Classifica;
 import BoulderKing.entities.users.User;
@@ -24,6 +26,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "eventi")
 @Data
 @NoArgsConstructor
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Evento {
 	@Id
 	@GeneratedValue
