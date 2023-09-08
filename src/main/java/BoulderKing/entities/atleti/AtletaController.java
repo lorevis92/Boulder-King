@@ -40,6 +40,8 @@ public class AtletaController {
 	@Autowired
 	PasswordEncoder bcrypt;
 
+// CRUD di base
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public User saveUser(@RequestBody @Validated AtletaPayload body) {
@@ -78,5 +80,56 @@ public class AtletaController {
 	@PutMapping("/trasformazione/{userId}")
 	public User updateUserToAtleta(@PathVariable UUID userId, @RequestBody UserToAtletaPayload body) {
 		return userServ.findByIdAndUpdateToAtleta(userId, body);
+	}
+
+// Filtri avanzati
+
+	// Filtra Atleta per nome
+	@GetMapping("/nome/{parteNome}")
+	public Page<User> findByParteNome(@PathVariable String parteNome, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return atletaServ.findByName(parteNome, page, size, sortBy);
+	}
+
+	// Filtra Atleta per Cognome
+	@GetMapping("/cognome/{parteCognome}")
+	public Page<User> findByParteCognome(@PathVariable String parteCognome, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return atletaServ.findBySurname(parteCognome, page, size, sortBy);
+	}
+
+//	// Filtra Atleta per UserName
+//	@GetMapping("/userName/{parteUserName}")
+//	public Page<User> findByParteUserName(@PathVariable String parteUserName,
+//			@RequestParam(defaultValue = "0") int page,
+//			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+//		return atletaServ.findByUserName(parteUserName, page, size, sortBy);
+//	}
+
+	// Filtra atleta per posizione classifica
+	@GetMapping("/posizioneEsatta/{posizione}")
+	public User findById(@PathVariable int posizione) {
+		return atletaServ.findByPosizioneClassifica(posizione);
+	}
+
+	// Filtra Atleta per posizione minima in classifica
+	@GetMapping("/posizioneMinima/{posizione}")
+	public Page<User> findByPosizioneMinima(@PathVariable int posizione, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return atletaServ.findByPosizioneClassificaMinima(posizione, page, size, sortBy);
+	}
+
+	// Filtra Atleta per posizione minima in classifica
+	@GetMapping("/punteggioMinimo/{punteggio}")
+	public Page<User> findByPunteggioMinimo(@PathVariable int punteggio, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return atletaServ.findByPunteggioClassificaMinimo(punteggio, page, size, sortBy);
+	}
+
+	// Ordina per punteggio
+	@GetMapping("/classifica")
+	public Page<User> ordinaByPunteggio(@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return atletaServ.OrinaByPunteggio(page, size, sortBy);
 	}
 }

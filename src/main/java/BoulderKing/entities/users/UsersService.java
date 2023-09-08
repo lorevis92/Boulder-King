@@ -55,7 +55,7 @@ public class UsersService {
 	public User findByIdAndUpdateToAtleta(UUID id, UserToAtletaPayload body) throws NotFoundException {
 		User found = this.findById(id);
 		found.setName(body.getName());
-		found.setSurname(body.getUserName());
+		found.setSurname(body.getSurName());
 		found.setUserName(body.getUserName());
 		found.setTipoUser(TipoUser.ATLETA);
 		return usersRepo.save(found);

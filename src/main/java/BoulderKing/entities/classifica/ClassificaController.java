@@ -60,4 +60,26 @@ public class ClassificaController {
 	public void deleteUser(@PathVariable UUID classificaId) {
 		classificaServ.findByIdAndDelete(classificaId);
 	}
+
+// Filtri avanzati
+	// Filtra Classifica per Evento
+	@GetMapping("/evento/{eventoId}")
+	public Classifica findByEvento(@PathVariable UUID eventoId) {
+		return classificaServ.findByEvento(eventoId);
+	}
+
+	// Find classifiche in cui un utente è arrivato primo
+	@GetMapping("/elencoPrimiPosti/{atletaId}")
+	// @PreAuthorize("hasAuthority('ADMIN')")
+	public Page<Classifica> getClassifichePrimoClassificato(@PathVariable UUID atletaId,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
+		return classificaServ.findByPrimoPosto(atletaId, page, size, sortBy);
+	}
+
+	// Nuomero di volte che un atleta è arrivato primo
+	@GetMapping("/countPrimoPosto/{atletaId}")
+	public int countPrimoPosto(@PathVariable UUID atletaId) {
+		return classificaServ.countPrimiPosti(atletaId);
+	}
 }

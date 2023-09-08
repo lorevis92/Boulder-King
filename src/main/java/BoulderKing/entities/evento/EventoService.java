@@ -59,4 +59,18 @@ public class EventoService {
 		Evento found = this.findById(id);
 		eventoRepo.delete(found);
 	}
+
+	// Eventi organizzati da un certo ente
+	public Page<Evento> findByOrganizzatore(UUID organizzatoreId, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort)); // (numero di pagina, numero di elementi per
+																		// pagina, nome del campo per cui sortare)
+		return eventoRepo.findByOrganizzatoreId(organizzatoreId, pageable);
+	}
+
+	// Eventi filtrati per nome evento
+	public Page<Evento> findByNome(String nomeEvento, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort)); // (numero di pagina, numero di elementi per
+																		// pagina, nome del campo per cui sortare)
+		return eventoRepo.findByNomeEventoContainingIgnoreCase(nomeEvento, pageable);
+	}
 }

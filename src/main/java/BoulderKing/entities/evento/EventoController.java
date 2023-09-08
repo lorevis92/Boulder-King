@@ -61,4 +61,23 @@ public class EventoController {
 	public void deleteUser(@PathVariable UUID eventoId) {
 		eventoServ.findByIdAndDelete(eventoId);
 	}
+
+// Filtraggi avanzati
+	// Eventi organizzati da un certo ente
+	@GetMapping("/organizzatore/{organizzatoreId}")
+	// @PreAuthorize("hasAuthority('ADMIN')")
+	public Page<Evento> FiltraEventiPerPrganizzatore(@PathVariable UUID organizzatoreId,
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return eventoServ.findByOrganizzatore(organizzatoreId, page, size, sortBy);
+	}
+
+	// Eventi filtrati per nome evento
+	@GetMapping("/nome/{nomeEvento}")
+	// @PreAuthorize("hasAuthority('ADMIN')")
+	public Page<Evento> FiltraEventiPerNome(@PathVariable String nomeEvento, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return eventoServ.findByNome(nomeEvento, page, size, sortBy);
+	}
+
 }

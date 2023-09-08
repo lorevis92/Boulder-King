@@ -28,6 +28,9 @@ public class AtletaService {
 		this.usersRepo = usersRepo;
 	}
 
+//CRUD Base
+
+	// Nuovo atleta
 	public User create(AtletaPayload body) {
 		// check if email already in use
 		usersRepo.findByEmail(body.getEmail()).ifPresent(atleta -> {
@@ -82,6 +85,62 @@ public class AtletaService {
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
 		User found = this.findById(id);
 		usersRepo.delete(found);
+	}
+
+//Filtri avanzati
+
+	// Find by parte nome
+	public Page<User> findByName(String parteNome, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findByNameContainingIgnoreCase(parteNome, pageable);
+	}
+
+	// Find by parte Cognome
+	public Page<User> findBySurname(String parteCognome, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findBySurnameContainingIgnoreCase(parteCognome, pageable);
+	}
+
+//	// Find by parte UserName
+//	public Page<User> findByUserName(String parteUserName, int page, int size, String sort) {
+//		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+//		return usersRepo.findByUserNameContainingIgnoreCase(parteUserName, pageable);
+//	}
+
+	// Find atleti con un punteggio in classifica superiore ad un dato punteggio
+	public Page<User> findByPunteggioMaggiore(int puntiClassifica, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findByPuntiClassificaGreaterThan(puntiClassifica, pageable);
+	}
+
+	// Find atleti con una determinata posizione in classifica
+	public User findByPosizioneClassifica(int posizione) throws BadRequestException {
+		Optional<User> optionalUser = usersRepo.findByPosizioneClassifica(posizione);
+
+		if (optionalUser.isPresent()) {
+			User user = optionalUser.get();
+				return user;
+		} else {
+			throw new BadRequestException("Non ci sono Atleti con queta posizione in classifica");
+		}
+	}
+
+	// Find atleti con la posizione in classifica da un punto in su
+	public Page<User> findByPosizioneClassificaMinima(int posizioneClassifica, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findByPosizioneClassificaLessThan(posizioneClassifica, pageable);
+	}
+
+	// Find atleti con un punteggio in classifica minimo
+	public Page<User> findByPunteggioClassificaMinimo(int posizioneClassifica, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findByPuntiClassificaGreaterThan(posizioneClassifica, pageable);
+	}
+
+	// Ordina gli atleti per punteggio classifica
+	public Page<User> OrinaByPunteggio(int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findAllByOrderByPosizioneClassificaDesc(pageable);
 	}
 
 }

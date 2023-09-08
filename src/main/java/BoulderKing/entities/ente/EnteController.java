@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import BoulderKing.Enum.TipoEnte;
 import BoulderKing.entities.ente.payload.EntePayload;
 import BoulderKing.entities.ente.payload.EnteUpdatePayload;
 import BoulderKing.entities.ente.payload.UserToEntePayload;
@@ -78,4 +79,17 @@ public class EnteController {
 		return userServ.findByIdAndUpdateToEnte(userId, body);
 	}
 
+	// Ricerca per nomeEnte
+	@GetMapping("/nome/{nomeEnte}")
+	public Page<User> findByNomeEnte(@PathVariable String nomeEnte, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return enteServ.findByNomeEnte(nomeEnte, page, size, sortBy);
+	}
+
+	// Ricerca per nomeEnte
+	@GetMapping("/tipo/{tipoEnte}")
+	public Page<User> findByNomeEnte(@PathVariable TipoEnte tipoEnte, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return enteServ.findByTipoEnte(tipoEnte, page, size, sortBy);
+	}
 }

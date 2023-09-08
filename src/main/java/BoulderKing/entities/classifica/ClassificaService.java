@@ -53,15 +53,15 @@ public class ClassificaService {
 		Classifica found = this.findById(classificaId);
 		found.setEvento(eventoServ.findById(body.getEvento()));
 		found.setPosizione01(userServ.findById(body.getPosizione01()));
-		found.setPosizione02(userServ.findById(body.getPosizione01()));
-		found.setPosizione03(userServ.findById(body.getPosizione01()));
-		found.setPosizione04(userServ.findById(body.getPosizione01()));
-		found.setPosizione05(userServ.findById(body.getPosizione01()));
-		found.setPosizione06(userServ.findById(body.getPosizione01()));
-		found.setPosizione07(userServ.findById(body.getPosizione01()));
-		found.setPosizione08(userServ.findById(body.getPosizione01()));
-		found.setPosizione09(userServ.findById(body.getPosizione01()));
-		found.setPosizione10(userServ.findById(body.getPosizione01()));
+		found.setPosizione02(userServ.findById(body.getPosizione02()));
+		found.setPosizione03(userServ.findById(body.getPosizione03()));
+		found.setPosizione04(userServ.findById(body.getPosizione04()));
+		found.setPosizione05(userServ.findById(body.getPosizione05()));
+		found.setPosizione06(userServ.findById(body.getPosizione06()));
+		found.setPosizione07(userServ.findById(body.getPosizione07()));
+		found.setPosizione08(userServ.findById(body.getPosizione08()));
+		found.setPosizione09(userServ.findById(body.getPosizione09()));
+		found.setPosizione10(userServ.findById(body.getPosizione10()));
 		found.setPuntiPosizione01(150);
 		found.setPuntiPosizione02(125);
 		found.setPuntiPosizione03(100);
@@ -78,5 +78,23 @@ public class ClassificaService {
 	public void findByIdAndDelete(UUID classificaId) throws NotFoundException {
 		Classifica found = this.findById(classificaId);
 		classificaRepo.delete(found);
+	}
+
+	// Filtri avanzati
+	// Filtra Classifica per Evento
+	public Classifica findByEvento(UUID eventoId) throws NotFoundException {
+		return classificaRepo.findClassificaByEventoId(eventoId).orElseThrow(() -> new NotFoundException(eventoId));
+	}
+	
+	// Find classifiche in cui un utente è arrivato primo
+	public Page<Classifica> findByPrimoPosto(UUID atletaId, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort)); // (numero di pagina, numero di elementi per
+																		// pagina, nome del campo per cui sortare)
+		return classificaRepo.findByPosizione01(userServ.findById(atletaId), pageable);
+	}
+
+	// Nuomero di volte che un atleta è arrivato primo
+	public int countPrimiPosti(UUID atletaId) {
+		return classificaRepo.countPrimiPosti(userServ.findById(atletaId));
 	}
 }

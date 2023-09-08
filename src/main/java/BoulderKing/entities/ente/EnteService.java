@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
 import BoulderKing.entities.ente.payload.EntePayload;
 import BoulderKing.entities.ente.payload.EnteUpdatePayload;
@@ -85,4 +86,17 @@ public class EnteService {
 		usersRepo.delete(found);
 	}
 
+// Ricerche avanzate
+
+	// Ricerca per nomeEnte
+	public Page<User> findByNomeEnte(String nomeEnte, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findByNomeEnteContainingIgnoreCase(nomeEnte, pageable);
+	}
+
+	// Ricerca per TipoEnte
+	public Page<User> findByTipoEnte(TipoEnte tipoEnte, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo.findByTipoEnte(tipoEnte, pageable);
+	}
 }
