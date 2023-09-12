@@ -130,6 +130,6 @@ public class AtletaController {
 	@GetMapping("/classifica")
 	public Page<User> ordinaByPunteggio(@RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
-		return atletaServ.OrinaByPunteggio(page, size, sortBy);
+		return atletaServ.OrdinaByPunteggio(page, size, sortBy);
 	}
 }

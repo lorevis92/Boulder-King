@@ -27,7 +27,7 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 	Page<User> findByTipoEnte(TipoEnte tipoEnte, Pageable pageable);
 
 	// Restituisci user in maniera ordinata
-	Page<User> findAllByOrderByPosizioneClassificaDesc(Pageable pageable);
+	Page<User> findAllByOrderByPosizioneClassifica(Pageable pageable);
 
 	Page<User> findAllByOrderByNomeEnte(Pageable pageable);
 

@@ -138,9 +138,9 @@ public class AtletaService {
 	}
 
 	// Ordina gli atleti per punteggio classifica
-	public Page<User> OrinaByPunteggio(int page, int size, String sort) {
+	public Page<User> OrdinaByPunteggio(int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return usersRepo.findAllByOrderByPosizioneClassificaDesc(pageable);
+		return usersRepo.findAllByOrderByPosizioneClassifica(pageable);
 	}
 
 }

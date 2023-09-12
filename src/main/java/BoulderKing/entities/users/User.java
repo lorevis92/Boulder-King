@@ -44,8 +44,16 @@ public class User implements UserDetails {
 	private String userName;
 	private String name;
 	private String surname;
-	private int posizioneClassifica;
-	private int puntiClassifica;
+	@Column(nullable = true)
+	private Integer posizioneClassifica;
+	@Column(nullable = true)
+	private Integer puntiClassifica;
+	@Column(nullable = true)
+	private Integer primoPosto;
+	@Column(nullable = true)
+	private Integer numeroPodi;
+	@Column(nullable = true)
+	private Integer numeroPartecipazioni;
 	@ManyToMany(mappedBy = "partecipanti")
 	@JsonManagedReference
 	private List<Evento> listaEventi;
@@ -71,6 +79,35 @@ public class User implements UserDetails {
 		this.email = email;
 		this.password = password;
 		this.role = Role.USER;
+	}
+
+	// CREAZIONE ENTI
+	public User(String email, String password, String nomeEnte, String telefono, String indirizzo, String info) {
+		this.email = email;
+		this.password = password;
+		this.role = Role.USER;
+		this.tipoUser = TipoUser.ENTE;
+		this.nomeEnte = nomeEnte;
+		this.numeroTelefonico = telefono;
+		this.indirizzo = indirizzo;
+		this.informazioni = info;
+	}
+
+	// CREAZIONE ATLETI
+	public User(String email, String password, String name, String surname, String userName,
+			Integer posizioneClassifica) {
+		this.email = email;
+		this.password = password;
+		this.role = Role.USER;
+		this.tipoUser = TipoUser.ATLETA;
+		this.userName = userName;
+		this.posizioneClassifica = posizioneClassifica;
+		this.numeroPartecipazioni = 0;
+		this.numeroPodi = 0;
+		this.puntiClassifica = 0;
+		this.primoPosto = 0;
+		this.name = name;
+		this.surname = surname;
 	}
 
 	@Override
