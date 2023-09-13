@@ -39,8 +39,8 @@ public class User implements UserDetails {
 	private UUID id;
 	@Column(nullable = false, unique = true)
 	private String email;
-//	private Immagine profilo;
-//	private Immagine copertina;
+	private String immagineProfilo;
+	private String immagineCopertina;
 	private String userName;
 	private String name;
 	private String surname;
@@ -67,6 +67,7 @@ public class User implements UserDetails {
 	String numeroTelefonico;
 	String emailContatto;
 	String indirizzo;
+	String orari;
 	String informazioni;
 	@Enumerated(EnumType.STRING)
 	TipoEnte tipoEnte;
@@ -81,7 +82,7 @@ public class User implements UserDetails {
 		this.role = Role.USER;
 	}
 
-	// CREAZIONE ENTI
+	// Costruttore CREAZIONE ENTI
 	public User(String email, String password, String nomeEnte, String telefono, String indirizzo, String info) {
 		this.email = email;
 		this.password = password;
@@ -93,7 +94,7 @@ public class User implements UserDetails {
 		this.informazioni = info;
 	}
 
-	// CREAZIONE ATLETI
+	// Costruttore CREAZIONE ATLETI
 	public User(String email, String password, String name, String surname, String userName,
 			Integer posizioneClassifica) {
 		this.email = email;

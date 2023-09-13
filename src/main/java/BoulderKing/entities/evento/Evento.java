@@ -37,6 +37,7 @@ public class Evento {
 	private User organizzatore;
 	private int puntiEvento;
 	private LocalDate data;
+	private String immagineEvento;
 	@OneToOne(mappedBy = "evento")
 	private Classifica classifica;
 	@ManyToMany
