@@ -1,10 +1,12 @@
 package BoulderKing.entities.evento;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import BoulderKing.entities.evento.eventopayload.AggiungiPartecipantePayload;
 import BoulderKing.entities.evento.eventopayload.NewEventoPayload;
+import BoulderKing.entities.users.User;
 
 @EnableMethodSecurity
 @RestController
@@ -78,6 +82,30 @@ public class EventoController {
 	public Page<Evento> FiltraEventiPerNome(@PathVariable String nomeEvento, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
 		return eventoServ.findByNome(nomeEvento, page, size, sortBy);
+	}
+	
+	//Aggiungi partecipanti all'evento
+	@PostMapping("/{idEvento}/partecipanti")
+	public ResponseEntity<?> aggiungiPartecipante(@PathVariable UUID idEvento,
+			@RequestBody AggiungiPartecipantePayload body) {
+		try {
+			Evento evento = eventoServ.aggiungiPartecipante(idEvento, body.getIdUtente());
+			return new ResponseEntity<>(evento, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+		}
+	}
+
+	// Lista partecipanti ad un evento
+	@GetMapping("/partecipanti/{idEvento}")
+	public ResponseEntity<List<User>> getPartecipantiEvento(@PathVariable UUID idEvento) {
+		try {
+			Evento evento = eventoServ.findById(idEvento);
+			List<User> partecipanti = evento.getPartecipanti();
+			return new ResponseEntity<>(partecipanti, HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	    }
 	}
 
 }

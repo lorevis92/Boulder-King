@@ -9,9 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
@@ -23,7 +22,6 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,7 +30,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "users")
 @Data
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties("listaEventi")
 public class User implements UserDetails {
 	@Id
 	@GeneratedValue
@@ -71,8 +69,8 @@ public class User implements UserDetails {
 	String informazioni;
 	@Enumerated(EnumType.STRING)
 	TipoEnte tipoEnte;
-	@OneToMany(mappedBy = "organizzatore")
-	private List<Evento> listaEventiOrganizzati;
+//	@OneToMany(mappedBy = "organizzatore")
+//	private List<Evento> listaEventiOrganizzati;
 
 
 

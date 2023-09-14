@@ -5,8 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import BoulderKing.entities.classifica.Classifica;
 import BoulderKing.entities.users.User;
@@ -26,7 +25,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "eventi")
 @Data
 @NoArgsConstructor
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonIgnoreProperties("partecipanti")
 public class Evento {
 	@Id
 	@GeneratedValue
@@ -44,4 +43,8 @@ public class Evento {
 	@JoinTable(name = "evento_utente", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "atleta_id"))
 	@JsonBackReference
 	private List<User> partecipanti;
+
+	protected void aggiungiPartecipante(User partecipante) {
+		partecipanti.add(partecipante);
+}
 }

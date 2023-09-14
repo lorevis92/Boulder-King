@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import BoulderKing.entities.evento.eventopayload.NewEventoPayload;
+import BoulderKing.entities.users.User;
 import BoulderKing.entities.users.UsersService;
 import BoulderKing.exceptions.NotFoundException;
 
@@ -73,4 +74,28 @@ public class EventoService {
 																		// pagina, nome del campo per cui sortare)
 		return eventoRepo.findByNomeEventoContainingIgnoreCase(nomeEvento, pageable);
 	}
+	
+	// Aggiungi partecipante ad una gara
+
+    public Evento aggiungiPartecipante(UUID idEvento, UUID idUtente) {
+        // Recupera l'evento dal repository
+        Evento evento = eventoRepo.findById(idEvento)
+            .orElseThrow(() -> new NotFoundException("Evento non trovato con ID: " + idEvento));
+
+        // Recupera l'utente dal repository tramite l'ID
+        User utente = userServ.findById(idUtente);
+
+        // Verifica se l'utente esiste
+        if (utente == null) {
+            throw new NotFoundException("Utente non trovato con ID: " + idUtente);
+        }
+
+        // Chiama il metodo aggiungiPartecipante con l'oggetto User
+        evento.aggiungiPartecipante(utente);
+
+        // Salva l'evento aggiornato nel repository
+        return eventoRepo.save(evento);
+    }
 }
+
+
