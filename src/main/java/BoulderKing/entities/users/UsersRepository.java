@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
+import BoulderKing.entities.evento.Evento;
 
 @Repository
 public interface UsersRepository extends JpaRepository<User, UUID> {
@@ -41,5 +42,7 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 	// Page<User> findByUserNameContainingIgnoreCase(String parteNome, Pageable
 	// pageable);
 
+	// Metodo per ottenere gli utenti partecipanti a un evento paginati e ordinati
+	Page<User> findAllByListaEventiContains(Evento evento, Pageable pageable);
 
 }

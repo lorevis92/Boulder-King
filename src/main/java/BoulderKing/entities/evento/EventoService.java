@@ -1,5 +1,7 @@
 package BoulderKing.entities.evento;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import BoulderKing.entities.evento.eventopayload.NewEventoPayload;
 import BoulderKing.entities.users.User;
+import BoulderKing.entities.users.UsersRepository;
 import BoulderKing.entities.users.UsersService;
 import BoulderKing.exceptions.NotFoundException;
 
@@ -26,6 +29,9 @@ public class EventoService {
 
 	@Autowired
 	public UsersService userServ;
+
+	@Autowired
+	public UsersRepository userRepo;
 
 	public Evento create(NewEventoPayload body) {
 		Evento newEvento = new Evento();
@@ -98,9 +104,19 @@ public class EventoService {
         return eventoRepo.save(evento);
     }
 
-	public Page<User> getPartecipantiPaginated(Evento evento, Pageable pageable) {
-		return new PageImpl<>(evento.getPartecipanti(), pageable, evento.getPartecipanti().size());
+	public Page<User> getPartecipantiPaginated(UUID idEvento, Pageable pageable) {
+		Evento evento = eventoRepo.findById(idEvento)
+				.orElseThrow(() -> new NotFoundException("Evento non trovato con ID: " + idEvento));
+
+		List<User> partecipanti = evento.getPartecipanti();
+		// Ordina i partecipanti in base alla posizione in classifica
+		partecipanti.sort(Comparator.comparingInt(User::getPosizioneClassifica));
+
+		// Implementa la paginazione qui usando pageable
+
+		return new PageImpl<>(partecipanti, pageable, partecipanti.size());
 	}
+
 }
 
 

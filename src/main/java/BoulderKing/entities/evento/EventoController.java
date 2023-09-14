@@ -105,13 +105,10 @@ public class EventoController {
 			@RequestParam(defaultValue = "id") String sortBy) {
 		try {
 			Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-			Evento evento = eventoServ.findById(idEvento);
-			Page<User> partecipanti = eventoServ.getPartecipantiPaginated(evento, pageable);
+			Page<User> partecipanti = eventoServ.getPartecipantiPaginated(idEvento, pageable);
 			return new ResponseEntity<>(partecipanti, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	    }
 	}
-
-
 }
