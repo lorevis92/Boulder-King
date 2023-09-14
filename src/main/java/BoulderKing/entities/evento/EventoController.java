@@ -1,10 +1,12 @@
 package BoulderKing.entities.evento;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -98,14 +100,18 @@ public class EventoController {
 
 	// Lista partecipanti ad un evento
 	@GetMapping("/partecipanti/{idEvento}")
-	public ResponseEntity<List<User>> getPartecipantiEvento(@PathVariable UUID idEvento) {
+	public ResponseEntity<Page<User>> getPartecipantiEvento(@PathVariable UUID idEvento,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
 		try {
+			Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 			Evento evento = eventoServ.findById(idEvento);
-			List<User> partecipanti = evento.getPartecipanti();
+			Page<User> partecipanti = eventoServ.getPartecipantiPaginated(evento, pageable);
 			return new ResponseEntity<>(partecipanti, HttpStatus.OK);
 		} catch (Exception e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	    }
 	}
+
 
 }
