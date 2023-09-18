@@ -1,5 +1,6 @@
 package BoulderKing.entities.evento;
 
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -12,4 +13,7 @@ public interface EventoRepository extends JpaRepository<Evento, UUID> {
 	Page<Evento> findByNomeEventoContainingIgnoreCase(String nomeEvento, Pageable pageable);
 
 	Page<Evento> findByOrganizzatoreId(UUID enteId, Pageable pageable);
+
+	Optional<Evento> findByClassificaId(UUID classificaId);
+
 	}

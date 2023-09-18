@@ -51,16 +51,27 @@ public class ClassificaService {
 	// found.setPuntiPosizione01(body.getPuntiPosizione01());
 	public Classifica findByIdAndUpdate(UUID classificaId, UpdateClassificaPayload body) throws NotFoundException {
 		Classifica found = this.findById(classificaId);
+		if (body.getEvento() != null)
 		found.setEvento(eventoServ.findById(body.getEvento()));
+		if (body.getPosizione01() != null)
 		found.setPosizione01(userServ.findById(body.getPosizione01()));
+		if (body.getPosizione02() != null)
 		found.setPosizione02(userServ.findById(body.getPosizione02()));
+		if (body.getPosizione03() != null)
 		found.setPosizione03(userServ.findById(body.getPosizione03()));
+		if (body.getPosizione04() != null)
 		found.setPosizione04(userServ.findById(body.getPosizione04()));
+		if (body.getPosizione05() != null)
 		found.setPosizione05(userServ.findById(body.getPosizione05()));
+		if (body.getPosizione06() != null)
 		found.setPosizione06(userServ.findById(body.getPosizione06()));
+		if (body.getPosizione07() != null)
 		found.setPosizione07(userServ.findById(body.getPosizione07()));
+		if (body.getPosizione08() != null)
 		found.setPosizione08(userServ.findById(body.getPosizione08()));
+		if (body.getPosizione09() != null)
 		found.setPosizione09(userServ.findById(body.getPosizione09()));
+		if (body.getPosizione10() != null)
 		found.setPosizione10(userServ.findById(body.getPosizione10()));
 		found.setPuntiPosizione01(150);
 		found.setPuntiPosizione02(125);

@@ -112,11 +112,38 @@ public class EventoService {
 		// Ordina i partecipanti in base alla posizione in classifica
 		partecipanti.sort(Comparator.comparingInt(User::getPosizioneClassifica));
 
-		// Implementa la paginazione qui usando pageable
+		int start = (int) pageable.getOffset();
+		int end = Math.min((start + pageable.getPageSize()), partecipanti.size());
 
-		return new PageImpl<>(partecipanti, pageable, partecipanti.size());
+		List<User> partecipantiPaginati = partecipanti.subList(start, end);
+
+		return new PageImpl<>(partecipantiPaginati, pageable, partecipanti.size());
 	}
 
+
+
+//	public Page<User> getPartecipantiPaginated(UUID idEvento, Pageable pageable) {
+//		Evento evento = eventoRepo.findById(idEvento)
+//				.orElseThrow(() -> new NotFoundException("Evento non trovato con ID: " + idEvento));
+//
+//		List<User> partecipanti = evento.getPartecipanti();
+//		// Ordina i partecipanti in base alla posizione in classifica
+//		partecipanti.sort(Comparator.comparingInt(User::getPosizioneClassifica));
+//
+//		int start = (int) pageable.getOffset();
+//		int end = (start + pageable.getPageSize()) > partecipanti.size() ? partecipanti.size()
+//				: (start + pageable.getPageSize());
+//
+//		List<User> partecipantiPaginati = partecipanti.subList(start, end);
+//
+//		return new PageImpl<>(partecipantiPaginati, pageable, partecipanti.size());
+//	}
+
+// TROVA UN EVENTO CONOSCENDO UNA CLASSIFICA
+	public Evento getEventoByClassificaId(UUID classificaId) throws NotFoundException {
+		return eventoRepo.findByClassificaId(classificaId)
+				.orElseThrow(() -> new NotFoundException("Evento non trovato per l'ID classifica: " + classificaId));
+	}
 }
 
 

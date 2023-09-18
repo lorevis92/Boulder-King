@@ -101,14 +101,22 @@ public class EventoController {
 	// Lista partecipanti ad un evento
 	@GetMapping("/partecipanti/{idEvento}")
 	public ResponseEntity<Page<User>> getPartecipantiEvento(@PathVariable UUID idEvento,
-			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
-			@RequestParam(defaultValue = "id") String sortBy) {
-		try {
-			Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-			Page<User> partecipanti = eventoServ.getPartecipantiPaginated(idEvento, pageable);
-			return new ResponseEntity<>(partecipanti, HttpStatus.OK);
-		} catch (Exception e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+	        @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+	        @RequestParam(defaultValue = "id") String sortBy) {
+	    try {
+	        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+	        Page<User> partecipanti = eventoServ.getPartecipantiPaginated(idEvento, pageable);
+	        return new ResponseEntity<>(partecipanti, HttpStatus.OK);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	    }
 	}
+
+	// Id di un evento sapendo la classifica associata
+	@GetMapping("/classifica/{classificaId}")
+	public ResponseEntity<Evento> getEventoByClassificaId(@PathVariable UUID classificaId) {
+		Evento evento = eventoServ.getEventoByClassificaId(classificaId);
+		return ResponseEntity.ok(evento);
+	}
+
 }

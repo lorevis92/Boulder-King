@@ -32,43 +32,43 @@ public class Classifica {
 	@ManyToOne
 	@JoinColumn(name = "atleta01_id")
 	private User posizione01;
-	private Integer puntiPosizione01;
+	private Integer puntiPosizione01 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta02_id")
 	private User posizione02;
-	private Integer puntiPosizione02;
+	private Integer puntiPosizione02 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta03_id")
 	private User posizione03;
-	private Integer puntiPosizione03;
+	private Integer puntiPosizione03 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta04_id")
 	private User posizione04;
-	private Integer puntiPosizione04;
+	private Integer puntiPosizione04 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta05_id")
 	private User posizione05;
-	private Integer puntiPosizione05;
+	private Integer puntiPosizione05 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta06_id")
 	private User posizione06;
-	private Integer puntiPosizione06;
+	private Integer puntiPosizione06 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta07_id")
 	private User posizione07;
-	private Integer puntiPosizione07;
+	private Integer puntiPosizione07 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta08_id")
 	private User posizione08;
-	private Integer puntiPosizione08;
+	private Integer puntiPosizione08 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta09_id")
 	private User posizione09;
-	private Integer puntiPosizione09;
+	private Integer puntiPosizione09 = 0;
 	@ManyToOne
 	@JoinColumn(name = "atleta10_id")
 	private User posizione10;
-	private Integer puntiPosizione10;
+	private Integer puntiPosizione10 = 0;
 
 	// Costruttore
 	public Classifica(Evento evento) {

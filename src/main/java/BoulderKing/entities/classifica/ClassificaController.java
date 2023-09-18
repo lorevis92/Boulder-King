@@ -32,7 +32,7 @@ public class ClassificaController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Classifica saveEvento() {
+	public Classifica saveClassifica() {
 		Classifica created = classificaServ.create();
 		return created;
 	}
