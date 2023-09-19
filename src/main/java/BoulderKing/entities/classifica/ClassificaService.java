@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import BoulderKing.entities.classifica.payload.UpdateClassificaPayload;
 import BoulderKing.entities.evento.EventoService;
+import BoulderKing.entities.users.User;
 import BoulderKing.entities.users.UsersService;
 import BoulderKing.exceptions.NotFoundException;
 
@@ -50,29 +51,8 @@ public class ClassificaService {
 	// allora devo cambiare il found.setPuntiPosizione01(150); in
 	// found.setPuntiPosizione01(body.getPuntiPosizione01());
 	public Classifica findByIdAndUpdate(UUID classificaId, UpdateClassificaPayload body) throws NotFoundException {
+
 		Classifica found = this.findById(classificaId);
-		if (body.getEvento() != null)
-		found.setEvento(eventoServ.findById(body.getEvento()));
-		if (body.getPosizione01() != null)
-		found.setPosizione01(userServ.findById(body.getPosizione01()));
-		if (body.getPosizione02() != null)
-		found.setPosizione02(userServ.findById(body.getPosizione02()));
-		if (body.getPosizione03() != null)
-		found.setPosizione03(userServ.findById(body.getPosizione03()));
-		if (body.getPosizione04() != null)
-		found.setPosizione04(userServ.findById(body.getPosizione04()));
-		if (body.getPosizione05() != null)
-		found.setPosizione05(userServ.findById(body.getPosizione05()));
-		if (body.getPosizione06() != null)
-		found.setPosizione06(userServ.findById(body.getPosizione06()));
-		if (body.getPosizione07() != null)
-		found.setPosizione07(userServ.findById(body.getPosizione07()));
-		if (body.getPosizione08() != null)
-		found.setPosizione08(userServ.findById(body.getPosizione08()));
-		if (body.getPosizione09() != null)
-		found.setPosizione09(userServ.findById(body.getPosizione09()));
-		if (body.getPosizione10() != null)
-		found.setPosizione10(userServ.findById(body.getPosizione10()));
 		found.setPuntiPosizione01(150);
 		found.setPuntiPosizione02(125);
 		found.setPuntiPosizione03(100);
@@ -83,6 +63,64 @@ public class ClassificaService {
 		found.setPuntiPosizione08(25);
 		found.setPuntiPosizione09(25);
 		found.setPuntiPosizione10(25);
+		if (body.getEvento() != null)
+			found.setEvento(eventoServ.findById(body.getEvento()));
+		if (body.getPosizione01() != null) {
+			User atleta01 = userServ.findById(body.getPosizione01());
+			found.setPosizione01(atleta01);
+			atleta01.setPrimoPosto(atleta01.getPrimoPosto() + 1);
+			atleta01.setNumeroPodi(atleta01.getNumeroPodi() + 1);
+			atleta01.setPuntiClassifica(atleta01.getPuntiClassifica() + found.getPuntiPosizione01());
+		}
+
+		if (body.getPosizione02() != null) {
+			User atleta02 = userServ.findById(body.getPosizione02());
+			found.setPosizione02(atleta02);
+			atleta02.setNumeroPodi(atleta02.getNumeroPodi() + 1);
+			atleta02.setPuntiClassifica(atleta02.getPuntiClassifica() + found.getPuntiPosizione02());
+		}
+		if (body.getPosizione03() != null) {
+			User atleta03 = userServ.findById(body.getPosizione03());
+			found.setPosizione03(atleta03);
+			atleta03.setNumeroPodi(atleta03.getNumeroPodi() + 1);
+			atleta03.setPuntiClassifica(atleta03.getPuntiClassifica() + found.getPuntiPosizione03());
+		}
+		if (body.getPosizione04() != null) {
+			User atleta04 = userServ.findById(body.getPosizione04());
+			found.setPosizione04(atleta04);
+			atleta04.setPuntiClassifica(atleta04.getPuntiClassifica() + found.getPuntiPosizione04());
+		}
+		if (body.getPosizione05() != null) {
+			User atleta05 = userServ.findById(body.getPosizione05());
+			found.setPosizione05(atleta05);
+			atleta05.setPuntiClassifica(atleta05.getPuntiClassifica() + found.getPuntiPosizione05());
+		}
+		if (body.getPosizione06() != null) {
+			User atleta06 = userServ.findById(body.getPosizione06());
+			found.setPosizione04(atleta06);
+			atleta06.setPuntiClassifica(atleta06.getPuntiClassifica() + found.getPuntiPosizione06());
+		}
+		if (body.getPosizione07() != null) {
+			User atleta07 = userServ.findById(body.getPosizione07());
+			found.setPosizione07(atleta07);
+			atleta07.setPuntiClassifica(atleta07.getPuntiClassifica() + found.getPuntiPosizione07());
+		}
+		if (body.getPosizione08() != null) {
+			User atleta08 = userServ.findById(body.getPosizione08());
+			found.setPosizione04(atleta08);
+			atleta08.setPuntiClassifica(atleta08.getPuntiClassifica() + found.getPuntiPosizione08());
+		}
+		if (body.getPosizione09() != null) {
+			User atleta09 = userServ.findById(body.getPosizione09());
+			found.setPosizione09(atleta09);
+			atleta09.setPuntiClassifica(atleta09.getPuntiClassifica() + found.getPuntiPosizione09());
+		}
+		if (body.getPosizione10() != null) {
+			User atleta10 = userServ.findById(body.getPosizione10());
+			found.setPosizione10(atleta10);
+			atleta10.setPuntiClassifica(atleta10.getPuntiClassifica() + found.getPuntiPosizione10());
+		}
+
 		return classificaRepo.save(found);
 	}
 
