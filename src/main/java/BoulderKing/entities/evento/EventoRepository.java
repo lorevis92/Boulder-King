@@ -16,4 +16,4 @@ public interface EventoRepository extends JpaRepository<Evento, UUID> {
 
 	Optional<Evento> findByClassificaId(UUID classificaId);
 
-	}
+}

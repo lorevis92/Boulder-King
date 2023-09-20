@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
+import BoulderKing.entities.caricaImmagini.Image;
 import BoulderKing.entities.evento.Evento;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,6 +23,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -37,8 +39,9 @@ public class User implements UserDetails {
 	private UUID id;
 	@Column(nullable = false, unique = true)
 	private String email;
-	private String immagineProfilo;
-	private String immagineCopertina;
+	@OneToOne(mappedBy = "userImmagine")
+	private Image immagineProfilo;
+	// private Image immagineCopertina;
 	private String userName;
 	private String name;
 	private String surname;
