@@ -65,22 +65,33 @@ public class ImageController {
                 .body(new ImageUploadResponse("Image uploaded successfully: " +
                         file.getOriginalFilename()));
     }
+//
+//    @GetMapping(path = {"/get/image/info/{name}"})
+//	public Image getImageDetails(@PathVariable("name") String name) throws IOException {
+//
+//        final Optional<Image> dbImage = imageRepository.findByName(name);
+//
+//		return Image.builder().name(dbImage.get().getName()).type(dbImage.get().getType())
+//				.image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
+//    }
 
-    @GetMapping(path = {"/get/image/info/{name}"})
-	public Image getImageDetails(@PathVariable("name") String name) throws IOException {
-
-        final Optional<Image> dbImage = imageRepository.findByName(name);
-
-		return Image.builder().name(dbImage.get().getName()).type(dbImage.get().getType())
-				.image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
+	@GetMapping("/get/image/{id}")
+	public ResponseEntity<byte[]> getImageById(@PathVariable UUID id) throws IOException {
+		Optional<Image> dbImage = imageRepository.findById(id);
+		if (dbImage.isPresent()) {
+			return ResponseEntity.ok().contentType(MediaType.valueOf(dbImage.get().getType()))
+					.body(ImageUtility.decompressImage(dbImage.get().getImage()));
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping(path = {"/get/image/{name}"})
-	public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
-
-        final Optional<Image> dbImage = imageRepository.findByName(name);
-
-		return ResponseEntity.ok().contentType(MediaType.valueOf(dbImage.get().getType()))
-				.body(ImageUtility.decompressImage(dbImage.get().getImage()));
-    }
+//    @GetMapping(path = {"/get/image/{name}"})
+//	public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
+//
+//        final Optional<Image> dbImage = imageRepository.findByName(name);
+//
+//		return ResponseEntity.ok().contentType(MediaType.valueOf(dbImage.get().getType()))
+//				.body(ImageUtility.decompressImage(dbImage.get().getImage()));
+//    }
 }
