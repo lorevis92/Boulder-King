@@ -39,6 +39,7 @@ public class SecurityConfig {
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/classifiche/**").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/upload/image").permitAll());
 		http.authorizeHttpRequests(auth -> auth.requestMatchers("/get/image/**").permitAll());
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/api/**").permitAll());
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		http.addFilterBefore(corsFilter, JWTAuthFilter.class);
 

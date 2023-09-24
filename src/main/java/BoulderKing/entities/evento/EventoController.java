@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
@@ -106,11 +107,17 @@ public class EventoController {
 	    try {
 	        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
 	        Page<User> partecipanti = eventoServ.getPartecipantiPaginated(idEvento, pageable);
-	        return new ResponseEntity<>(partecipanti, HttpStatus.OK);
+
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("X-Total-Count", String.valueOf(partecipanti.getTotalElements())); // Aggiungi il numero totale
+																							// di elementi all'header
+
+			return ResponseEntity.ok().headers(headers).body(partecipanti);
 	    } catch (Exception e) {
 	        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	    }
 	}
+
 
 	// Id di un evento sapendo la classifica associata
 	@GetMapping("/classifica/{classificaId}")

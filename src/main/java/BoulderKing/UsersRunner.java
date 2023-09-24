@@ -12,6 +12,7 @@ import BoulderKing.entities.users.User;
 import BoulderKing.entities.users.UsersRepository;
 import BoulderKing.entities.users.UsersService;
 import BoulderKing.entities.users.payloads.UserRequestPayload;
+import BoulderKing.googleapi.GoogleMapsService;
 
 @Component
 public class UsersRunner implements CommandLineRunner {
@@ -20,6 +21,9 @@ public class UsersRunner implements CommandLineRunner {
 
 	@Autowired
 	UsersRepository usersRepo;
+
+	@Autowired
+	GoogleMapsService mapServ;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -59,6 +63,8 @@ public class UsersRunner implements CommandLineRunner {
 //			usersRepo.save(user);
 		}
 		
+		this.mapServ.fetchClimbingGymsFromGoogleMaps();
+
 	}
 
 }

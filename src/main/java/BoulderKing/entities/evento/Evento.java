@@ -34,7 +34,6 @@ public class Evento {
 	private String nomeEvento;
 	private String località;
 	@ManyToOne
-	@JsonIgnore
 	private User organizzatore;
 	private int puntiEvento;
 	private LocalDate data;
@@ -43,7 +42,6 @@ public class Evento {
 //	private Image immagineEvento;
 	private String immagineEvento;
 	@OneToOne(mappedBy = "evento")
-	@JsonIgnore
 	private Classifica classifica;
 	@ManyToMany
 	@JoinTable(name = "evento_utente", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "atleta_id"))

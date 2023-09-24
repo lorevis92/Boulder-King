@@ -37,11 +37,14 @@ public class User implements UserDetails {
 	@Id
 	@GeneratedValue
 	private UUID id;
-	@Column(nullable = false, unique = true)
+	@Column(unique = true)
 	private String email;
+	// Utilizzo questo campo quando devo salvare l'immagine nel DB
 	@OneToOne(mappedBy = "userImmagine")
 	private Image immagineProfilo;
-	// private Image immagineCopertina;
+	// Utilizzo questo campo quando devo solo salvare l'URL dell'immagine
+	@Column(length = 500)
+	private String foto;
 	private String userName;
 	private String name;
 	private String surname;
@@ -70,6 +73,14 @@ public class User implements UserDetails {
 	String indirizzo;
 	String orari;
 	String informazioni;
+	// Servono per visualizzare la cartina della posizione della palestra
+	double longitudine;
+	double latitudine;
+	// I seguenti campi servono per poter applicare i vari filtri sugli atleti e di
+	// conseguenza stillare classifiche
+	String regione;
+	String provincia;
+	String citta;
 	@Enumerated(EnumType.STRING)
 	TipoEnte tipoEnte;
 //	@OneToMany(mappedBy = "organizzatore")
