@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
+import BoulderKing.Enum.ZonaItalia;
 import BoulderKing.entities.ente.payload.EntePayload;
 import BoulderKing.entities.ente.payload.EnteUpdatePayload;
 import BoulderKing.entities.users.Role;
@@ -98,5 +99,14 @@ public class EnteService {
 	public Page<User> findByTipoEnte(TipoEnte tipoEnte, int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
 		return usersRepo.findByTipoEnte(tipoEnte, pageable);
+	}
+
+	// Filtraggio
+	public Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta,
+			ZonaItalia zonaItalia, TipoEnte tipoEnte, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return usersRepo
+				.findByFilters(
+				nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, pageable);
 	}
 }

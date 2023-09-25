@@ -157,4 +157,8 @@ public class User implements UserDetails {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public User(String string, String string2, String string3, String string4, ZonaItalia nord, TipoEnte palestra) {
+		// TODO Auto-generated constructor stub
+	}
 }
