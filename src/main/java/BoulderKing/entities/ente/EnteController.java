@@ -52,7 +52,7 @@ public class EnteController {
 
 	@GetMapping
 	// @PreAuthorize("hasAuthority('ADMIN')")
-	public Page<User> getEnte(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+	public Page<User> getEnte(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size,
 			@RequestParam(defaultValue = "id") String sortBy) {
 		return enteServ.find(page, size, sortBy);
 	}

@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
+import BoulderKing.Enum.ZonaItalia;
 import BoulderKing.entities.caricaImmagini.Image;
 import BoulderKing.entities.evento.Evento;
 import jakarta.persistence.Column;
@@ -81,6 +82,8 @@ public class User implements UserDetails {
 	String regione;
 	String provincia;
 	String citta;
+	@Enumerated(EnumType.STRING)
+	ZonaItalia zonaItalia;
 	@Enumerated(EnumType.STRING)
 	TipoEnte tipoEnte;
 //	@OneToMany(mappedBy = "organizzatore")
