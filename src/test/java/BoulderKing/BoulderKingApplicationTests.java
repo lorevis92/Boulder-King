@@ -13,12 +13,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import BoulderKing.Enum.TipoEnte;
+import BoulderKing.Enum.ZonaItalia;
 import BoulderKing.entities.users.User;
 import BoulderKing.entities.users.UsersRepository;
 import BoulderKing.entities.users.UsersService;
-
 @SpringJUnitConfig
 @SpringBootTest
 class BoulderKingApplicationTests {
@@ -53,6 +57,24 @@ class BoulderKingApplicationTests {
 		verify(usersRepository, times(1)).findById(userId);
 	}
 
+	@Test
+	public void testFindByFilters() {
+		// Creare dati di prova nel database
+		User user1 = new User("nomeEnte1", "regione1", "provincia1", "citta1", ZonaItalia.NORD, TipoEnte.PALESTRA);
+		User user2 = new User("nomeEnte2", "regione2", "provincia2", "citta2", ZonaItalia.CENTRO, TipoEnte.FALESIA);
+		usersRepository.save(user1);
+		usersRepository.save(user2);
+
+		// Eseguire la query con i parametri noti
+		Page<User> result = usersRepository
+				.findByNomeEnteContainingIgnoreCaseAndRegioneAndProvinciaAndCittaAndZonaItaliaAndTipoEnte("nomeEnte1",
+						"regione1", "provincia1", "citta1", ZonaItalia.NORD, TipoEnte.PALESTRA,
+						PageRequest.of(0, 10, Sort.by("id")));
+
+		// Verificare che i risultati contengano ciò che ti aspetti
+		assertEquals(1, result.getTotalElements());
+		assertEquals("nomeEnte1", result.getContent().get(0).getNomeEnte());
+	}
 
 
 }
