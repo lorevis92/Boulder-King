@@ -23,8 +23,10 @@ public interface EventoRepository extends JpaRepository<Evento, UUID> {
 			+ "AND (:regione IS NULL OR LOWER(e.regione) = LOWER(:regione)) "
 			+ "AND (:provincia IS NULL OR LOWER(e.provincia) = LOWER(:provincia)) "
 			+ "AND (:citta IS NULL OR LOWER(e.citta) = LOWER(:citta)) "
+			+ "AND (:zonaItalia IS NULL OR LOWER(e.zonaItalia) = LOWER(:zonaItalia)) "
 			+ "AND (:isPassed IS NULL OR UPPER(e.isPassed) = UPPER(:isPassed))")
-	Page<Evento> findByFilters(String nomeEvento, String nomeEnte, String regione, String provincia, String citta,
+	Page<Evento> findByFilters(String nomeEvento, String nomeEnte, String zonaItalia, String regione, String provincia,
+			String citta,
 			String isPassed, Pageable pageable);
 
 }

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 public class NewEventoPayload {
 	private String nomeEvento;
-	private String località;
+	private String zonaItalia;
 	private UUID organizzatore;
 	private int puntiEvento;
 	private LocalDate data;

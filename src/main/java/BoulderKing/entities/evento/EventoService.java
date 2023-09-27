@@ -36,7 +36,7 @@ public class EventoService {
 	public Evento create(NewEventoPayload body) {
 		Evento newEvento = new Evento();
 		newEvento.setNomeEvento(body.getNomeEvento());
-		newEvento.setLocalità(body.getLocalità());
+		newEvento.setZonaItalia(body.getZonaItalia());
 		newEvento.setPuntiEvento(body.getPuntiEvento());
 		newEvento.setData(body.getData());
 		newEvento.setImmagineEvento(body.getImmagineEvento());
@@ -61,7 +61,7 @@ public class EventoService {
 	public Evento findByIdAndUpdate(UUID eventoId, NewEventoPayload body) throws NotFoundException {
 		Evento found = this.findById(eventoId);
 		found.setNomeEvento(body.getNomeEvento());
-		found.setLocalità(body.getLocalità());
+		found.setZonaItalia(body.getZonaItalia());
 		found.setPuntiEvento(body.getPuntiEvento());
 		found.setData(body.getData());
 		found.setOrganizzatore(userServ.findById(body.getOrganizzatore()));
@@ -152,10 +152,11 @@ public class EventoService {
 
 	// Filtraggio
 	public Page<Evento> findByFilters(String nomeEvento, String nomeEnte, String regione, String provincia,
-			String citta,
+			String citta, String zonaItalia,
 			String isPassed, int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return eventoRepo.findByFilters(nomeEvento, nomeEnte, regione, provincia, citta, isPassed, pageable);
+		return eventoRepo.findByFilters(nomeEvento, nomeEnte, zonaItalia, regione, provincia, citta, isPassed,
+				pageable);
 	}
 }
 

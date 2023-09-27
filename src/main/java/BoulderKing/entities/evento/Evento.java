@@ -36,7 +36,6 @@ public class Evento {
 	@GeneratedValue
 	private UUID id;
 	private String nomeEvento;
-	private String località;
 	@ManyToOne
 	private User organizzatore;
 	private int puntiEvento;
@@ -49,6 +48,7 @@ public class Evento {
 	String regione;
 	String provincia;
 	String citta;
+	private String zonaItalia;
 	@OneToOne(mappedBy = "evento")
 	private Classifica classifica;
 	@ManyToMany
