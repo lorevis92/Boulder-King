@@ -52,7 +52,7 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 			+ "AND (:regione IS NULL OR LOWER(u.regione) = LOWER(:regione)) "
 			+ "AND (:provincia IS NULL OR LOWER(u.provincia) = LOWER(:provincia)) "
 			+ "AND (:citta IS NULL OR LOWER(u.citta) = LOWER(:citta)) "
-			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) = UPPER(:zonaItalia)) "
+			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) = UPPER(:zonaItalia)) " + "AND (u.tipoUser = ENTE) "
 			+ "AND (:tipoEnte IS NULL OR UPPER(u.tipoEnte) = UPPER(:tipoEnte))")
 	Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
 			String tipoEnte, Pageable pageable);
