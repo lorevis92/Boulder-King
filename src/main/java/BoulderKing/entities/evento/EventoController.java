@@ -126,4 +126,15 @@ public class EventoController {
 		return ResponseEntity.ok(evento);
 	}
 
+	// Ricerca con tutti i filtri
+	@GetMapping("/search")
+	public Page<Evento> findByFilters(@RequestParam(required = false) String nomeEvento,
+			@RequestParam(required = false) String nomeEnte,
+			@RequestParam(required = false) String regione, @RequestParam(required = false) String provincia,
+			@RequestParam(required = false) String citta, @RequestParam(required = false) String isPassed,
+			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+			@RequestParam(defaultValue = "id") String sortBy) {
+		return eventoServ.findByFilters(nomeEvento, nomeEnte, regione, provincia, citta, isPassed, page, size, sortBy);
+	}
+
 }

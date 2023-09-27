@@ -39,7 +39,12 @@ public class EventoService {
 		newEvento.setLocalità(body.getLocalità());
 		newEvento.setPuntiEvento(body.getPuntiEvento());
 		newEvento.setData(body.getData());
+		newEvento.setImmagineEvento(body.getImmagineEvento());
 		newEvento.setOrganizzatore(userServ.findById(body.getOrganizzatore()));
+		newEvento.setCitta(body.getCitta());
+		newEvento.setProvincia(body.getProvincia());
+		newEvento.setRegione(body.getRegione());
+		newEvento.hasPassed();
 		return eventoRepo.save(newEvento);
 	}
 
@@ -143,6 +148,14 @@ public class EventoService {
 	public Evento getEventoByClassificaId(UUID classificaId) throws NotFoundException {
 		return eventoRepo.findByClassificaId(classificaId)
 				.orElseThrow(() -> new NotFoundException("Evento non trovato per l'ID classifica: " + classificaId));
+	}
+
+	// Filtraggio
+	public Page<Evento> findByFilters(String nomeEvento, String nomeEnte, String regione, String provincia,
+			String citta,
+			String isPassed, int page, int size, String sort) {
+		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		return eventoRepo.findByFilters(nomeEvento, nomeEnte, regione, provincia, citta, isPassed, pageable);
 	}
 }
 

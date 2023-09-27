@@ -8,9 +8,13 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import BoulderKing.Enum.EventoPassato;
 import BoulderKing.entities.classifica.Classifica;
 import BoulderKing.entities.users.User;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -40,7 +44,11 @@ public class Evento {
 //	Ho deciso di gestire le foto degli eventi con un semplice URL inserito a mano nel DB dato chesto avendo problemi con le dimensioni dei file da caricare
 //	@OneToOne(mappedBy = "eventoImmagine")
 //	private Image immagineEvento;
+	@Column(length = 100000)
 	private String immagineEvento;
+	String regione;
+	String provincia;
+	String citta;
 	@OneToOne(mappedBy = "evento")
 	private Classifica classifica;
 	@ManyToMany
@@ -48,8 +56,17 @@ public class Evento {
 	@JsonBackReference
 	@JsonIgnore
 	private List<User> partecipanti;
+	@Enumerated(EnumType.STRING)
+	private EventoPassato isPassed;
 
 	protected void aggiungiPartecipante(User partecipante) {
 		partecipanti.add(partecipante);
+	}
+
+	protected void hasPassed() {
+		if (this.data.isAfter(LocalDate.now())) {
+			this.isPassed = EventoPassato.PASSATO;
+		} else
+			this.isPassed = EventoPassato.FUTURO;
 	}
 }

@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 import lombok.Getter;
+import lombok.Setter;
 
+@Setter
 @Getter
 public class NewEventoPayload {
 	private String nomeEvento;
@@ -12,4 +14,8 @@ public class NewEventoPayload {
 	private UUID organizzatore;
 	private int puntiEvento;
 	private LocalDate data;
+	private String immagineEvento;
+	private String regione;
+	private String provincia;
+	private String citta;
 }
