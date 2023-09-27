@@ -17,18 +17,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import BoulderKing.entities.atleti.AtletaService;
 import BoulderKing.entities.classifica.payload.UpdateClassificaPayload;
+import BoulderKing.entities.users.User;
 
 @EnableMethodSecurity
 @RestController
 @RequestMapping("/classifiche")
 public class ClassificaController {
 	private final ClassificaService classificaServ;
+	private final AtletaService atletaServ;
 
 	@Autowired
-	public ClassificaController(ClassificaService classificaServ) {
+	public ClassificaController(ClassificaService classificaServ, AtletaService atletaServ) {
 		this.classificaServ = classificaServ;
+		this.atletaServ = atletaServ;
 	}
+
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -82,4 +87,15 @@ public class ClassificaController {
 	public int countPrimoPosto(@PathVariable UUID atletaId) {
 		return classificaServ.countPrimiPosti(atletaId);
 	}
+
+	// Ricerca con tutti i filtri
+	@GetMapping("/search")
+	public Page<User> findByFilters(@RequestParam(required = false) String nomeEnte,
+			@RequestParam(required = false) String regione, @RequestParam(required = false) String provincia,
+			@RequestParam(required = false) String citta, @RequestParam(required = false) String zonaItalia,
+			@RequestParam(required = false) String tipoEnte, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+		return atletaServ.findByFilters(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, page, size, sortBy);
+	}
+
 }

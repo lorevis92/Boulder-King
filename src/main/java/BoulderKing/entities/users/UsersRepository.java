@@ -46,8 +46,7 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 	// Metodo per ottenere gli utenti partecipanti a un evento paginati e ordinati
 	Page<User> findAllByListaEventiContains(Evento evento, Pageable pageable);
 
-	// Metodo per il filtraggio
-
+	// Metodo per il filtraggio degli ENTI
 	@Query("SELECT u FROM User u WHERE "
 			+ "(:nomeEnte IS NULL OR LOWER(u.nomeEnte) LIKE LOWER(CONCAT('%', :nomeEnte, '%'))) "
 			+ "AND (:regione IS NULL OR LOWER(u.regione) = LOWER(:regione)) "
@@ -56,6 +55,17 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) = UPPER(:zonaItalia)) "
 			+ "AND (:tipoEnte IS NULL OR UPPER(u.tipoEnte) = UPPER(:tipoEnte))")
 	Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
+			String tipoEnte, Pageable pageable);
+
+	// Metodo per il filtraggio degli ATLETI
+	@Query("SELECT u FROM User u WHERE "
+			+ "(:nomeEnte IS NULL OR LOWER(u.nomeEnte) LIKE LOWER(CONCAT('%', :nomeEnte, '%'))) "
+			+ "AND (:regione IS NULL OR LOWER(u.regione) = LOWER(:regione)) "
+			+ "AND (:provincia IS NULL OR LOWER(u.provincia) = LOWER(:provincia)) "
+			+ "AND (:citta IS NULL OR LOWER(u.citta) = LOWER(:citta)) "
+			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) = UPPER(:zonaItalia)) " + "AND (u.tipoUser = ATLETA) "
+			+ "AND (:tipoEnte IS NULL OR UPPER(u.tipoEnte) = UPPER(:tipoEnte))")
+	Page<User> findByFiltersAtleti(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
 			String tipoEnte, Pageable pageable);
 
 }
