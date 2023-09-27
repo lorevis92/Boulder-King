@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 
 import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
-import BoulderKing.Enum.ZonaItalia;
 import BoulderKing.entities.evento.Evento;
 
 @Repository
@@ -54,9 +53,9 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 			+ "AND (:regione IS NULL OR LOWER(u.regione) = LOWER(:regione)) "
 			+ "AND (:provincia IS NULL OR LOWER(u.provincia) = LOWER(:provincia)) "
 			+ "AND (:citta IS NULL OR LOWER(u.citta) = LOWER(:citta)) "
-			+ "AND (:zonaItalia IS NULL OR u.zonaItalia = :zonaItalia) "
-			+ "AND (:tipoEnte IS NULL OR u.tipoEnte = :tipoEnte)")
-	Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta, ZonaItalia zonaItalia,
-			TipoEnte tipoEnte, Pageable pageable);
+			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) = UPPER(:zonaItalia)) "
+			+ "AND (:tipoEnte IS NULL OR UPPER(u.tipoEnte) = UPPER(:tipoEnte))")
+	Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
+			String tipoEnte, Pageable pageable);
 
 }

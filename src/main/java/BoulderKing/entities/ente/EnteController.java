@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import BoulderKing.Enum.TipoEnte;
-import BoulderKing.Enum.ZonaItalia;
 import BoulderKing.entities.ente.payload.EntePayload;
 import BoulderKing.entities.ente.payload.EnteUpdatePayload;
 import BoulderKing.entities.ente.payload.UserToEntePayload;
@@ -98,8 +97,8 @@ public class EnteController {
 	@GetMapping("/search")
 	public Page<User> findByFilters(@RequestParam(required = false) String nomeEnte,
 			@RequestParam(required = false) String regione, @RequestParam(required = false) String provincia,
-			@RequestParam(required = false) String citta, @RequestParam(required = false) ZonaItalia zonaItalia,
-			@RequestParam(required = false) TipoEnte tipoEnte, @RequestParam(defaultValue = "0") int page,
+			@RequestParam(required = false) String citta, @RequestParam(required = false) String zonaItalia,
+			@RequestParam(required = false) String tipoEnte, @RequestParam(defaultValue = "0") int page,
 			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
 		return enteServ.findByFilters(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, page, size, sortBy);
 	}
