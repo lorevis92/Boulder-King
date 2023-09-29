@@ -12,6 +12,7 @@ public class NewEventoPayload {
 	private String nomeEvento;
 	private String zonaItalia;
 	private UUID organizzatore;
+	private String creatoreEvento;
 	private int puntiEvento;
 	private LocalDate data;
 	private String immagineEvento;

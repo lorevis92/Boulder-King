@@ -8,6 +8,7 @@ import java.net.URL;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import BoulderKing.Enum.TipoEnte;
@@ -20,6 +21,9 @@ import BoulderKing.entities.users.UsersRepository;
 public class GoogleMapsService {
     private final UsersRepository usersRepo;
 
+	// Chiave API di Google Maps
+	@Value("${google.maps.api.key}")
+	private String apiKey;
     @Autowired
     public GoogleMapsService(UsersRepository usersRepo) {
         this.usersRepo = usersRepo;
@@ -28,7 +32,7 @@ public class GoogleMapsService {
     public void fetchClimbingGymsFromGoogleMaps() {
         try {
             // Chiave API di Google Maps
-			String apiKey = "AIzaSyCJ572aOuiFdh1FQcIsFTojM8xjKSh3cKg"; // Sostituisci con la tua chiave API
+
 			String apiUrl = "https://maps.googleapis.com/maps/api/place/textsearch/json?query=climbing+gym+in+Umbria&region=it&key="
 					+ apiKey;
 			String nextPageToken = "ATJ83zjkuRA0y0-1p6vrBrACLHlunaqX8YowpRVmLy0E579OKcNpaTnVU50OFWbJs8fss3Y8FQmOgHMVDA97uV4lbiVIilnIP69EWX1hnOCsU0IR-vxsd-SsjccsVdz7F1S4xVYUxRpGQz5zdesgo-05i-GzdFs7a8ytvTdb3VboqzCEfFzDUT0jI0JGGNAgRKGJxiJtLuWBNQTrvJ_k5bUzlGp9nuUqzcVqwM4AqnSVZsUDyLv8MzcMf22ZorUt2SdAF20lD7LqcHJ-uW6k9HlU1Db5gjqWQP0q06IzNlX-xImZqBEurZQGAX0t64E8RbzPLVjkwLP7lKLAOC5Fu0e-ZFyz-dK9mq_EqL7lMKFFG290bpTrhYjnGWotXPikxk3EmvtifRpK5BoWs4JNa017iDMbW9KMmI3_dA";

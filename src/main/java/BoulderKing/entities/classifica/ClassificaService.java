@@ -97,7 +97,7 @@ public class ClassificaService {
 		}
 		if (body.getPosizione06() != null) {
 			User atleta06 = userServ.findById(body.getPosizione06());
-			found.setPosizione04(atleta06);
+			found.setPosizione06(atleta06);
 			atleta06.setPuntiClassifica(atleta06.getPuntiClassifica() + found.getPuntiPosizione06());
 		}
 		if (body.getPosizione07() != null) {
@@ -107,7 +107,7 @@ public class ClassificaService {
 		}
 		if (body.getPosizione08() != null) {
 			User atleta08 = userServ.findById(body.getPosizione08());
-			found.setPosizione04(atleta08);
+			found.setPosizione08(atleta08);
 			atleta08.setPuntiClassifica(atleta08.getPuntiClassifica() + found.getPuntiPosizione08());
 		}
 		if (body.getPosizione09() != null) {

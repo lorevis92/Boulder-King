@@ -41,10 +41,15 @@ public class EventoService {
 		newEvento.setData(body.getData());
 		newEvento.setImmagineEvento(body.getImmagineEvento());
 		newEvento.setOrganizzatore(userServ.findById(body.getOrganizzatore()));
+		newEvento.setCreatoreEvento(body.getCreatoreEvento());
 		newEvento.setCitta(body.getCitta());
 		newEvento.setProvincia(body.getProvincia());
 		newEvento.setRegione(body.getRegione());
 		newEvento.hasPassed();
+		// Aggiungi istruzioni di logging
+		System.out.println("Data dell'evento: " + newEvento.getData());
+		System.out.println("Valore di isPassed: " + newEvento.getIsPassed());
+
 		return eventoRepo.save(newEvento);
 	}
 

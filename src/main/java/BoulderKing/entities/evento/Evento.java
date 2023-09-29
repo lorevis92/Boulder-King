@@ -37,7 +37,8 @@ public class Evento {
 	private UUID id;
 	private String nomeEvento;
 	@ManyToOne
-	private User organizzatore;
+	private User organizzatore; // Per organizzatore si intende ENTE che ospita l'evento
+	private String creatoreEvento;
 	private int puntiEvento;
 	private LocalDate data;
 //	Ho deciso di gestire le foto degli eventi con un semplice URL inserito a mano nel DB dato chesto avendo problemi con le dimensioni dei file da caricare
@@ -64,9 +65,12 @@ public class Evento {
 	}
 
 	protected void hasPassed() {
-		if (this.data.isAfter(LocalDate.now())) {
-			this.isPassed = EventoPassato.PASSATO;
-		} else
-			this.isPassed = EventoPassato.FUTURO;
+		if (this.data != null) {
+			if (this.data.isAfter(LocalDate.now())) {
+				this.isPassed = EventoPassato.FUTURO;
+			} else {
+				this.isPassed = EventoPassato.PASSATO;
+			}
+		}
 	}
 }

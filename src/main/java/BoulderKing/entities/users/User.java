@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -62,8 +63,12 @@ public class User implements UserDetails {
 	@ManyToMany(mappedBy = "partecipanti")
 	@JsonManagedReference
 	private List<Evento> listaEventi;
+	// Imposto questo affinchè la password, dato sensibile non esca mai dal db.
+	// Posso estendere questo anche ad altri dati ma per pra va bene così
+	@JsonIgnore
 	private String password;
 	@Enumerated(EnumType.STRING)
+	@JsonIgnore
 	private Role role;
 	@Enumerated(EnumType.STRING)
 	private TipoUser tipoUser;

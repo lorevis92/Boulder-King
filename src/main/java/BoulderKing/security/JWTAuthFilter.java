@@ -70,7 +70,16 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 		System.out.println(request.getServletPath());
 		// Serve per bypassare questo filtro per alcune richieste (tipo tutte quelle su
 		// /auth/**)
-		return new AntPathMatcher().match("/auth/**", request.getServletPath());
+		return new AntPathMatcher().match("/auth/**", request.getServletPath())
+				|| new AntPathMatcher().match("/user/**", request.getServletPath())
+				|| new AntPathMatcher().match("/enti/**", request.getServletPath())
+				|| new AntPathMatcher().match("/eventi/**", request.getServletPath())
+				|| new AntPathMatcher().match("/atleti/**", request.getServletPath())
+				|| new AntPathMatcher().match("/classifiche/**", request.getServletPath())
+				|| new AntPathMatcher().match("/upload/image**", request.getServletPath())
+				|| new AntPathMatcher().match("/get/image/**", request.getServletPath())
+				|| new AntPathMatcher().match("/api/**", request.getServletPath());
+
 	}
 
 }
