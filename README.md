@@ -5,7 +5,7 @@ Descrizione
   Boulder King è una piattaforma per la gestione di eventi di arrampicata e bouldering. Questo progetto è stato sviluppato come parte del capstone project e utilizza Angular 14 per il front end e Spring Boot per il back end, con un database PostgreSQL (PgAdmin4).
   
   Sono state create due repository diverse, una per il front end ed una per il back end, in questa repository si trova il back end. Il front end è disponibile a questo link:
-  https://github.com/lorevis92/BoulderKing-FrontEnd
+   (https://github.com/lorevis92/BoulderKing-FrontEnd/tree/FrontEndVersione1.1)
 
 Prerequisiti
   Node.js: Installare Node.js da https://nodejs.org/ per eseguire l'app Angular.
