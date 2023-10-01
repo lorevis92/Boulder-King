@@ -2,6 +2,7 @@ package BoulderKing.entities.users.payloads;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,13 +12,30 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserRequestPayload {
 //	@NotNull(message = "Il nome è obbligatorio")
-//	@Size(min = 3, max = 30, message = "Nome deve avere minimo 3 caratteri, massimo 30")
-//	private String name;
+	@Size(min = 3, max = 30, message = "Nome deve avere minimo 3 caratteri, massimo 30")
+	private String name;
 //	@NotNull(message = "Il cognome è obbligatorio")
-//	private String surname;
+	private String surname;
+	private String nomeEnte;
+	private String tipoUser;
 	@NotNull(message = "L'email è obbligatoria")
 	@Email(message = "L'email inserita non è un indirizzo valido")
 	private String email;
 	@NotNull(message = "La password è obbligatoria")
 	private String password;
+	private String userName;
+	private String numeroTelefonico;
+	private String indirizzo;
+	private String orari;
+	private String informazioni;
+	private double latitudine;
+	private double longitudine;
+	private String citta;
+	private String provincia;
+	private String regione;
+	private String zonaItalia;
+	private String tipoEnte;
+
+
+
 }

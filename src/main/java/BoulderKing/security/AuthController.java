@@ -31,10 +31,10 @@ public class AuthController {
 
 	@PostMapping("/register")
 	@ResponseStatus(HttpStatus.CREATED)
-	public User saveUser(@RequestBody @Validated UserRequestPayload body) {
+	public UserRequestPayload saveUser(@RequestBody @Validated UserRequestPayload body) {
 		body.setPassword(bcrypt.encode(body.getPassword()));
-		User created = usersService.create(body);
-		return created;
+		usersService.create(body);
+		return body;
 	}
 
 	@PostMapping("/login")

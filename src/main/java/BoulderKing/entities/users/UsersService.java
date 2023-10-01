@@ -9,7 +9,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import BoulderKing.Enum.TipoEnte;
 import BoulderKing.Enum.TipoUser;
+import BoulderKing.Enum.ZonaItalia;
 import BoulderKing.entities.atleti.payload.UserToAtletaPayload;
 import BoulderKing.entities.ente.payload.UserToEntePayload;
 import BoulderKing.entities.users.payloads.UserRequestPayload;
@@ -30,8 +32,22 @@ public class UsersService {
 		usersRepo.findByEmail(body.getEmail()).ifPresent(user -> {
 			throw new BadRequestException("L'email è già stata utilizzata");
 		});
-		User newUser = new User(body.getEmail(), body.getPassword());
+		User newUser = new User();
+		newUser.setEmail(body.getEmail());
+		newUser.setPassword(body.getPassword());
+		newUser.setName(body.getName());
+		newUser.setSurname(body.getSurname());
+		newUser.setNomeEnte(body.getNomeEnte());
+		newUser.setTipoUser(convertiStringaInTipoUser(body));
+		newUser.setRole(Role.USER);
 		return usersRepo.save(newUser);
+	}
+
+	private TipoUser convertiStringaInTipoUser(UserRequestPayload body) {
+		if ("ENTE".equals(body.getTipoUser())) {
+			return TipoUser.ENTE;
+		} else
+			return TipoUser.ATLETA;
 	}
 
 	public Page<User> find(int page, int size, String sort) {
@@ -48,6 +64,33 @@ public class UsersService {
 		User found = this.findById(id);
 		found.setEmail(body.getEmail());
 		found.setPassword(body.getPassword());
+		found.setName(body.getName());
+		found.setSurname(body.getSurname());
+		found.setNomeEnte(body.getNomeEnte());
+		found.setUserName(body.getUserName());
+		found.setNumeroTelefonico(body.getNumeroTelefonico());
+		found.setIndirizzo(body.getIndirizzo());
+		found.setOrari(body.getOrari());
+		found.setInformazioni(body.getInformazioni());
+		found.setLongitudine(body.getLongitudine());
+		found.setLatitudine(body.getLatitudine());
+		found.setCitta(body.getCitta());
+		found.setProvincia(body.getProvincia());
+		found.setRegione(body.getRegione());
+		if (body.getZonaItalia() != null) {
+			if (body.getZonaItalia().equals("NORD")) {
+				found.setZonaItalia(ZonaItalia.NORD);
+			} else if (body.getZonaItalia().equals("CENTRO")) {
+				found.setZonaItalia(ZonaItalia.CENTRO);
+			}
+		}
+		if (body.getTipoEnte() != null) {
+			if (body.getTipoEnte().equals("FALESIA")) {
+				found.setTipoEnte(TipoEnte.FALESIA);
+			} else if (body.getTipoEnte().equals("PALESTRA")) {
+				found.setTipoEnte(TipoEnte.PALESTRA);
+			}
+		}
 		return usersRepo.save(found);
 	}
 
