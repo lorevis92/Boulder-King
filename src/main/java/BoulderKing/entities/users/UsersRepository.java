@@ -68,4 +68,7 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 	Page<User> findByFiltersAtleti(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
 			String tipoEnte, Pageable pageable);
 
+	@Query("SELECT u FROM User u WHERE u.tipoUser = 'ATLETA' ORDER BY u.puntiClassifica DESC")
+	Page<User> findOrderedAtleti(Pageable pageable);
+
 }

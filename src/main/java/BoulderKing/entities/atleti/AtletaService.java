@@ -44,6 +44,12 @@ public class AtletaService {
 		nuovoAtleta.setPassword(body.getPassword());
 		nuovoAtleta.setRole(Role.USER);
 		nuovoAtleta.setTipoUser(TipoUser.ATLETA);
+		nuovoAtleta.setNumeroPartecipazioni(0);
+		nuovoAtleta.setNumeroPodi(0);
+		nuovoAtleta.setPosizioneClassifica(0);
+		nuovoAtleta.setPrimoPosto(0);
+		nuovoAtleta.setPuntiClassifica(0);
+
 		return usersRepo.save(nuovoAtleta);
 	}
 
@@ -140,7 +146,7 @@ public class AtletaService {
 	// Ordina gli atleti per punteggio classifica
 	public Page<User> OrdinaByPunteggio(int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return usersRepo.findAllByOrderByPosizioneClassifica(pageable);
+		return usersRepo.findOrderedAtleti(pageable);
 	}
 
 	// Trova gli atleti applicando filtri generali
