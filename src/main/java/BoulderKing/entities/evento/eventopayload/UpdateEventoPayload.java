@@ -1,17 +1,15 @@
 package BoulderKing.entities.evento.eventopayload;
 
 import java.time.LocalDate;
-import java.util.UUID;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
 @Getter
-public class NewEventoPayload {
+@Setter
+public class UpdateEventoPayload {
 	private String nomeEvento;
 	private String zonaItalia;
-	private UUID organizzatore;
 	private String creatoreEvento;
 	private int puntiEvento;
 	private LocalDate data;

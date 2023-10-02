@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import BoulderKing.entities.evento.eventopayload.AggiungiPartecipantePayload;
 import BoulderKing.entities.evento.eventopayload.NewEventoPayload;
+import BoulderKing.entities.evento.eventopayload.UpdateEventoPayload;
 import BoulderKing.entities.users.User;
 
 @EnableMethodSecurity
@@ -59,7 +60,7 @@ public class EventoController {
 	}
 
 	@PutMapping("/{eventoId}")
-	public Evento updateUser(@PathVariable UUID eventoId, @RequestBody NewEventoPayload body) {
+	public Evento updateUser(@PathVariable UUID eventoId, @RequestBody UpdateEventoPayload body) {
 		return eventoServ.findByIdAndUpdate(eventoId, body);
 	}
 

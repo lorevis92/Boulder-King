@@ -46,10 +46,12 @@ public class Evento {
 //	private Image immagineEvento;
 	@Column(length = 100000)
 	private String immagineEvento;
-	String regione;
-	String provincia;
-	String citta;
+	private String regione;
+	private String provincia;
+	private String citta;
 	private String zonaItalia;
+	private String info;
+	private String sito;
 	@OneToOne(mappedBy = "evento")
 	private Classifica classifica;
 	@ManyToMany

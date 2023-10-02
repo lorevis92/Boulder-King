@@ -13,6 +13,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import BoulderKing.entities.evento.eventopayload.NewEventoPayload;
+import BoulderKing.entities.evento.eventopayload.UpdateEventoPayload;
 import BoulderKing.entities.users.User;
 import BoulderKing.entities.users.UsersRepository;
 import BoulderKing.entities.users.UsersService;
@@ -45,6 +46,8 @@ public class EventoService {
 		newEvento.setCitta(body.getCitta());
 		newEvento.setProvincia(body.getProvincia());
 		newEvento.setRegione(body.getRegione());
+		newEvento.setInfo(body.getInfo());
+		newEvento.setSito(body.getSito());
 		newEvento.hasPassed();
 		// Aggiungi istruzioni di logging
 		System.out.println("Data dell'evento: " + newEvento.getData());
@@ -63,15 +66,55 @@ public class EventoService {
 		return eventoRepo.findById(eventoId).orElseThrow(() -> new NotFoundException(eventoId));
 	}
 
-	public Evento findByIdAndUpdate(UUID eventoId, NewEventoPayload body) throws NotFoundException {
+	public Evento findByIdAndUpdate(UUID eventoId, UpdateEventoPayload body) throws NotFoundException {
+		// Recupera l'evento esistente dal database
 		Evento found = this.findById(eventoId);
-		found.setNomeEvento(body.getNomeEvento());
-		found.setZonaItalia(body.getZonaItalia());
-		found.setPuntiEvento(body.getPuntiEvento());
-		found.setData(body.getData());
-		found.setOrganizzatore(userServ.findById(body.getOrganizzatore()));
+
+		// Copia i nuovi dati solo se sono diversi da null o valori vuoti
+		if (body.getNomeEvento() != null && !body.getNomeEvento().isEmpty()) {
+			found.setNomeEvento(body.getNomeEvento());
+		}
+
+		if (body.getPuntiEvento() > 0) {
+			found.setPuntiEvento(body.getPuntiEvento());
+		}
+
+		if (body.getData() != null) {
+			found.setData(body.getData());
+		}
+
+		if (body.getImmagineEvento() != null && !body.getImmagineEvento().isEmpty()) {
+			found.setImmagineEvento(body.getImmagineEvento());
+		}
+
+		if (body.getCitta() != null && !body.getCitta().isEmpty()) {
+			found.setCitta(body.getCitta());
+		}
+
+		if (body.getProvincia() != null && !body.getProvincia().isEmpty()) {
+			found.setProvincia(body.getProvincia());
+		}
+
+		if (body.getRegione() != null && !body.getRegione().isEmpty()) {
+			found.setRegione(body.getRegione());
+		}
+
+		if (body.getZonaItalia() != null && !body.getZonaItalia().isEmpty()) {
+			found.setZonaItalia(body.getZonaItalia());
+		}
+
+		if (body.getInfo() != null && !body.getInfo().isEmpty()) {
+			found.setInfo(body.getInfo());
+		}
+
+		if (body.getSito() != null && !body.getSito().isEmpty()) {
+			found.setSito(body.getSito());
+		}
+
+		// Salva l'evento aggiornato nel database
 		return eventoRepo.save(found);
 	}
+
 
 	public void findByIdAndDelete(UUID id) throws NotFoundException {
 		Evento found = this.findById(id);
