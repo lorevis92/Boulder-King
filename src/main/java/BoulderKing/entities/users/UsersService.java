@@ -61,43 +61,75 @@ public class UsersService {
 	}
 
 	public User findByIdAndUpdate(UUID id, UserRequestPayload body) throws NotFoundException {
-		User found = this.findById(id);
-		found.setEmail(body.getEmail());
-		found.setPassword(body.getPassword());
-		found.setName(body.getName());
-		found.setSurname(body.getSurname());
-		found.setNomeEnte(body.getNomeEnte());
-		found.setUserName(body.getUserName());
-		found.setNumeroTelefonico(body.getNumeroTelefonico());
-		found.setIndirizzo(body.getIndirizzo());
-		found.setOrari(body.getOrari());
-		found.setInformazioni(body.getInformazioni());
-		found.setLongitudine(body.getLongitudine());
-		found.setLatitudine(body.getLatitudine());
-		found.setCitta(body.getCitta());
-		found.setProvincia(body.getProvincia());
-		found.setRegione(body.getRegione());
-		if (body.getZonaItalia() != null) {
-			String zonaItalia = body.getZonaItalia().toUpperCase();
-			if (zonaItalia.equals("NORD")) {
-				found.setZonaItalia(ZonaItalia.NORD);
-			} else if (zonaItalia.equals("CENTRO")) {
-				found.setZonaItalia(ZonaItalia.CENTRO);
-			}
-			else if (zonaItalia.equals("SUD")) {
-				found.setZonaItalia(ZonaItalia.SUD);
-			}
+	    User found = this.findById(id);
+
+	    if (body.getEmail() != null) {
+	        found.setEmail(body.getEmail());
+	    }
+	    if (body.getPassword() != null) {
+	        found.setPassword(body.getPassword());
+	    }
+	    if (body.getName() != null) {
+	        found.setName(body.getName());
+	    }
+	    if (body.getSurname() != null) {
+	        found.setSurname(body.getSurname());
+	    }
+	    if (body.getNomeEnte() != null) {
+	        found.setNomeEnte(body.getNomeEnte());
+	    }
+	    if (body.getUserName() != null) {
+	        found.setUserName(body.getUserName());
+	    }
+	    if (body.getNumeroTelefonico() != null) {
+	        found.setNumeroTelefonico(body.getNumeroTelefonico());
+	    }
+	    if (body.getIndirizzo() != null) {
+	        found.setIndirizzo(body.getIndirizzo());
+	    }
+	    if (body.getOrari() != null) {
+	        found.setOrari(body.getOrari());
+	    }
+	    if (body.getInformazioni() != null) {
+	        found.setInformazioni(body.getInformazioni());
+	    }
+		if (body.getLongitudine() != 0.0) {
+			found.setLongitudine(body.getLongitudine());
 		}
-		if (body.getTipoEnte() != null) {
-			String tipoEnte = body.getTipoEnte().toUpperCase();
-			if (tipoEnte.equals("FALESIA")) {
-				found.setTipoEnte(TipoEnte.FALESIA);
-			} else if (tipoEnte.equals("PALESTRA")) {
-				found.setTipoEnte(TipoEnte.PALESTRA);
-			}
+		if (body.getLatitudine() != 0.0) {
+			found.setLatitudine(body.getLatitudine());
 		}
-		return usersRepo.save(found);
+	    if (body.getCitta() != null) {
+	        found.setCitta(body.getCitta());
+	    }
+	    if (body.getProvincia() != null) {
+	        found.setProvincia(body.getProvincia());
+	    }
+	    if (body.getRegione() != null) {
+	        found.setRegione(body.getRegione());
+	    }
+	    if (body.getZonaItalia() != null) {
+	        String zonaItalia = body.getZonaItalia().toUpperCase();
+	        if (zonaItalia.equals("NORD")) {
+	            found.setZonaItalia(ZonaItalia.NORD);
+	        } else if (zonaItalia.equals("CENTRO")) {
+	            found.setZonaItalia(ZonaItalia.CENTRO);
+	        } else if (zonaItalia.equals("SUD")) {
+	            found.setZonaItalia(ZonaItalia.SUD);
+	        }
+	    }
+	    if (body.getTipoEnte() != null) {
+	        String tipoEnte = body.getTipoEnte().toUpperCase();
+	        if (tipoEnte.equals("FALESIA")) {
+	            found.setTipoEnte(TipoEnte.FALESIA);
+	        } else if (tipoEnte.equals("PALESTRA")) {
+	            found.setTipoEnte(TipoEnte.PALESTRA);
+	        }
+	    }
+
+	    return usersRepo.save(found);
 	}
+
 
 	// Update User to Atleta
 	public User findByIdAndUpdateToAtleta(UUID id, UserToAtletaPayload body) throws NotFoundException {
