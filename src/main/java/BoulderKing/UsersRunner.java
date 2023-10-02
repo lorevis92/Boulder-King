@@ -61,7 +61,7 @@ public class UsersRunner implements CommandLineRunner {
 ////			usersRepo.save(user);
 //		}
 		
-		this.mapServ.fetchClimbingGymsFromGoogleMaps();
+			// this.mapServ.fetchClimbingGymsFromGoogleMaps();
 
 	}
 

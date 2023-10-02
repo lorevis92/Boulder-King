@@ -79,6 +79,7 @@ public class User implements UserDetails {
 	String indirizzo;
 	String orari;
 	String informazioni;
+	double rating;
 	// Servono per visualizzare la cartina della posizione della palestra
 	double longitudine;
 	double latitudine;

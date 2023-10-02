@@ -78,16 +78,21 @@ public class UsersService {
 		found.setProvincia(body.getProvincia());
 		found.setRegione(body.getRegione());
 		if (body.getZonaItalia() != null) {
-			if (body.getZonaItalia().equals("NORD")) {
+			String zonaItalia = body.getZonaItalia().toUpperCase();
+			if (zonaItalia.equals("NORD")) {
 				found.setZonaItalia(ZonaItalia.NORD);
-			} else if (body.getZonaItalia().equals("CENTRO")) {
+			} else if (zonaItalia.equals("CENTRO")) {
 				found.setZonaItalia(ZonaItalia.CENTRO);
+			}
+			else if (zonaItalia.equals("SUD")) {
+				found.setZonaItalia(ZonaItalia.SUD);
 			}
 		}
 		if (body.getTipoEnte() != null) {
-			if (body.getTipoEnte().equals("FALESIA")) {
+			String tipoEnte = body.getTipoEnte().toUpperCase();
+			if (tipoEnte.equals("FALESIA")) {
 				found.setTipoEnte(TipoEnte.FALESIA);
-			} else if (body.getTipoEnte().equals("PALESTRA")) {
+			} else if (tipoEnte.equals("PALESTRA")) {
 				found.setTipoEnte(TipoEnte.PALESTRA);
 			}
 		}
