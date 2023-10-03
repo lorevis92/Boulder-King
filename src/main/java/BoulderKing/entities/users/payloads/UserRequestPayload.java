@@ -28,6 +28,7 @@ public class UserRequestPayload {
 	private String indirizzo;
 	private String orari;
 	private String informazioni;
+	private String sito;
 	private double latitudine;
 	private double longitudine;
 	private String citta;

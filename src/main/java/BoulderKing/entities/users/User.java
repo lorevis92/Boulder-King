@@ -94,6 +94,8 @@ public class User implements UserDetails {
 	TipoEnte tipoEnte;
 //	@OneToMany(mappedBy = "organizzatore")
 //	private List<Evento> listaEventiOrganizzati;
+	@Column(length = 100000)
+	private String sito;
 
 
 
