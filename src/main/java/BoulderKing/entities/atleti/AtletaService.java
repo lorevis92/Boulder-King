@@ -151,9 +151,15 @@ public class AtletaService {
 
 	// Trova gli atleti applicando filtri generali
 	public Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
-			String tipoEnte, int page, int size, String sort) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
-		return usersRepo.findByFiltersAtleti(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, pageable);
+			String tipoEnte, int page, int size, String sort, String sortOrder) {
+		if ("desc".equalsIgnoreCase(sortOrder)) {
+			Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.desc(sort)));
+			return usersRepo.findByFiltersAtleti(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, pageable);
+		} else {
+			Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Order.asc(sort)));
+			return usersRepo.findByFiltersAtleti(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, pageable);
+		}
+
 	}
 
 }

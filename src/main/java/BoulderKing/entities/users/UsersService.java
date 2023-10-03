@@ -40,6 +40,11 @@ public class UsersService {
 		newUser.setNomeEnte(body.getNomeEnte());
 		newUser.setTipoUser(convertiStringaInTipoUser(body));
 		newUser.setRole(Role.USER);
+		newUser.setNumeroPartecipazioni(0);
+		newUser.setNumeroPodi(0);
+		newUser.setPosizioneClassifica(0);
+		newUser.setPrimoPosto(0);
+		newUser.setPuntiClassifica(0);
 		return usersRepo.save(newUser);
 	}
 
@@ -93,6 +98,9 @@ public class UsersService {
 	    if (body.getInformazioni() != null) {
 	        found.setInformazioni(body.getInformazioni());
 	    }
+		if (body.getSito() != null) {
+			found.setSito(body.getSito());
+		}
 		if (body.getLongitudine() != 0.0) {
 			found.setLongitudine(body.getLongitudine());
 		}

@@ -51,6 +51,7 @@ public class Evento {
 	private String citta;
 	private String zonaItalia;
 	private String info;
+	@Column(length = 100000)
 	private String sito;
 	@OneToOne(mappedBy = "evento")
 	private Classifica classifica;

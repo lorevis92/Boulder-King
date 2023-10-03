@@ -94,8 +94,10 @@ public class ClassificaController {
 			@RequestParam(required = false) String regione, @RequestParam(required = false) String provincia,
 			@RequestParam(required = false) String citta, @RequestParam(required = false) String zonaItalia,
 			@RequestParam(required = false) String tipoEnte, @RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
-		return atletaServ.findByFilters(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, page, size, sortBy);
+			@RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy,
+			@RequestParam(defaultValue = "asc") String sortOrder) {
+		return atletaServ.findByFilters(nomeEnte, regione, provincia, citta, zonaItalia, tipoEnte, page, size, sortBy,
+				sortOrder);
 	}
 
 }
