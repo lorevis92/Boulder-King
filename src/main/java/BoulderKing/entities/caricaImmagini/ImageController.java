@@ -10,9 +10,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -52,28 +54,13 @@ public class ImageController {
 			}
 		});
 
-//		eventoId.ifPresent(id -> {
-//			Evento evento = eventoServ.findById(id);
-//			if (evento != null) {
-//				image.setEventoImmagine(evento);
-//			}
-//		});
-
 		imageRepository.save(image);
 
         return ResponseEntity.status(HttpStatus.OK)
                 .body(new ImageUploadResponse("Image uploaded successfully: " +
                         file.getOriginalFilename()));
     }
-//
-//    @GetMapping(path = {"/get/image/info/{name}"})
-//	public Image getImageDetails(@PathVariable("name") String name) throws IOException {
-//
-//        final Optional<Image> dbImage = imageRepository.findByName(name);
-//
-//		return Image.builder().name(dbImage.get().getName()).type(dbImage.get().getType())
-//				.image(ImageUtility.decompressImage(dbImage.get().getImage())).build();
-//    }
+
 
 	@GetMapping("/get/image/{id}")
 	public ResponseEntity<byte[]> getImageById(@PathVariable UUID id) throws IOException {
@@ -86,12 +73,43 @@ public class ImageController {
         }
     }
 
-//    @GetMapping(path = {"/get/image/{name}"})
-//	public ResponseEntity<byte[]> getImage(@PathVariable("name") String name) throws IOException {
-//
-//        final Optional<Image> dbImage = imageRepository.findByName(name);
-//
-//		return ResponseEntity.ok().contentType(MediaType.valueOf(dbImage.get().getType()))
-//				.body(ImageUtility.decompressImage(dbImage.get().getImage()));
-//    }
+	@PutMapping("/upload/image/{id}")
+	public ResponseEntity<ImageUploadResponse> changeImageById(@PathVariable UUID id,
+			@RequestParam("image") MultipartFile file) throws IOException {
+		System.out.println("PUT endpoint called with ID: " + id); // Log per debugging
+		   
+		Optional<Image> dbImageOptional = imageRepository.findById(id);
+		if (!dbImageOptional.isPresent()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		Image dbImage = dbImageOptional.get();
+			dbImage.setName(file.getOriginalFilename());
+			dbImage.setType(file.getContentType());
+			dbImage.setImage(ImageUtility.compressImage(file.getBytes()));
+			imageRepository.save(dbImage);
+			return ResponseEntity.status(HttpStatus.OK).body(new ImageUploadResponse("Image updated successfully"));
+		}
+
+		@DeleteMapping("/delete/image/{id}")
+		public ResponseEntity<?> deleteImageById(@PathVariable UUID id) {
+			System.out.println("Attempting to delete image with ID: " + id); // Aggiungi log per debugging
+			Optional<Image> dbImageOptional = imageRepository.findById(id);
+			if (!dbImageOptional.isPresent()) {
+				System.out.println("Image with ID: " + id + " not found!"); // Aggiungi log per debugging
+				return ResponseEntity.notFound().build();
+			}
+
+			try {
+				imageRepository.deleteById(id);
+				System.out.println("Image with ID: " + id + " successfully deleted!"); // Aggiungi log per debugging
+				return ResponseEntity.ok().body(new ImageUploadResponse("Image deleted successfully"));
+			} catch (Exception e) {
+				System.out.println("Error deleting image with ID: " + id + " - " + e.getMessage()); // Aggiungi log per
+																									// debugging
+				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+			}
+		}
+
+
 }
