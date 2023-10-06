@@ -68,7 +68,7 @@ public class Evento {
 		partecipanti.add(partecipante);
 	}
 
-	protected void hasPassed() {
+	public void hasPassed() {
 		if (this.data != null) {
 			if (this.data.isAfter(LocalDate.now())) {
 				this.isPassed = EventoPassato.FUTURO;

@@ -1,5 +1,6 @@
 package BoulderKing.entities.evento;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -9,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import BoulderKing.Enum.EventoPassato;
+
 @Repository
 public interface EventoRepository extends JpaRepository<Evento, UUID> {
 	Page<Evento> findByNomeEventoContainingIgnoreCase(String nomeEvento, Pageable pageable);
@@ -16,6 +19,8 @@ public interface EventoRepository extends JpaRepository<Evento, UUID> {
 	Page<Evento> findByOrganizzatoreId(UUID enteId, Pageable pageable);
 
 	Optional<Evento> findByClassificaId(UUID classificaId);
+
+	List<Evento> findByIsPassed(EventoPassato eventoPassato);
 
 	@Query("SELECT e FROM Evento e JOIN e.organizzatore u WHERE "
 			+ "(:nomeEvento IS NULL OR LOWER(e.nomeEvento) LIKE LOWER(CONCAT('%', :nomeEvento, '%'))) "
