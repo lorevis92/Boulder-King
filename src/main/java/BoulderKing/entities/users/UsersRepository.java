@@ -49,11 +49,12 @@ public interface UsersRepository extends JpaRepository<User, UUID> {
 	// Metodo per il filtraggio degli ENTI
 	@Query("SELECT u FROM User u WHERE "
 			+ "(:nomeEnte IS NULL OR LOWER(u.nomeEnte) LIKE LOWER(CONCAT('%', :nomeEnte, '%'))) "
-			+ "AND (:regione IS NULL OR LOWER(u.regione) = LOWER(:regione)) "
-			+ "AND (:provincia IS NULL OR LOWER(u.provincia) = LOWER(:provincia)) "
-			+ "AND (:citta IS NULL OR LOWER(u.citta) = LOWER(:citta)) "
-			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) = UPPER(:zonaItalia)) " + "AND (u.tipoUser = ENTE) "
-			+ "AND (:tipoEnte IS NULL OR UPPER(u.tipoEnte) = UPPER(:tipoEnte))")
+			+ "AND (:regione IS NULL OR LOWER(u.regione) LIKE LOWER(CONCAT('%', :regione, '%'))) "
+			+ "AND (:provincia IS NULL OR LOWER(u.provincia) LIKE LOWER(CONCAT('%', :provincia, '%'))) "
+			+ "AND (:citta IS NULL OR LOWER(u.citta) LIKE LOWER(CONCAT('%', :citta, '%'))) "
+			+ "AND (:zonaItalia IS NULL OR UPPER(u.zonaItalia) LIKE UPPER(CONCAT('%',:zonaItalia, '%'))) "
+			+ "AND (u.tipoUser = ENTE) "
+			+ "AND (:tipoEnte IS NULL OR UPPER(u.tipoEnte) LIKE UPPER(CONCAT('%',:tipoEnte, '%')))")
 	Page<User> findByFilters(String nomeEnte, String regione, String provincia, String citta, String zonaItalia,
 			String tipoEnte, Pageable pageable);
 

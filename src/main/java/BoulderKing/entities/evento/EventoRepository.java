@@ -20,11 +20,11 @@ public interface EventoRepository extends JpaRepository<Evento, UUID> {
 	@Query("SELECT e FROM Evento e JOIN e.organizzatore u WHERE "
 			+ "(:nomeEvento IS NULL OR LOWER(e.nomeEvento) LIKE LOWER(CONCAT('%', :nomeEvento, '%'))) "
 			+ "AND (:nomeEnte IS NULL OR LOWER(u.nomeEnte) LIKE LOWER(CONCAT('%', :nomeEnte, '%'))) "
-			+ "AND (:regione IS NULL OR LOWER(e.regione) = LOWER(:regione)) "
-			+ "AND (:provincia IS NULL OR LOWER(e.provincia) = LOWER(:provincia)) "
-			+ "AND (:citta IS NULL OR LOWER(e.citta) = LOWER(:citta)) "
-			+ "AND (:zonaItalia IS NULL OR LOWER(e.zonaItalia) = LOWER(:zonaItalia)) "
-			+ "AND (:isPassed IS NULL OR UPPER(e.isPassed) = UPPER(:isPassed))")
+			+ "AND (:regione IS NULL OR LOWER(e.regione) LIKE LOWER(CONCAT(:regione, '%'))) "
+			+ "AND (:provincia IS NULL OR LOWER(e.provincia) LIKE LOWER(CONCAT(:provincia, '%'))) "
+			+ "AND (:citta IS NULL OR LOWER(e.citta) LIKE LOWER(CONCAT(:citta, '%'))) "
+			+ "AND (:zonaItalia IS NULL OR UPPER(e.zonaItalia) LIKE UPPER(CONCAT(:zonaItalia, '%'))) "
+			+ "AND (:isPassed IS NULL OR UPPER(e.isPassed) LIKE UPPER(CONCAT(:isPassed, '%')))")
 	Page<Evento> findByFilters(String nomeEvento, String nomeEnte, String zonaItalia, String regione, String provincia,
 			String citta,
 			String isPassed, Pageable pageable);
