@@ -1,5 +1,7 @@
 package BoulderKing.entities.evento;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
@@ -200,12 +202,13 @@ public class EventoService {
 
 	// Filtraggio
 	public Page<Evento> findByFilters(String nomeEvento, String nomeEnte, String regione, String provincia,
-			String citta, String zonaItalia,
-			String isPassed, int page, int size, String sort) {
+			String citta, String zonaItalia, String isPassed, String data, int page, int size, String sort) {
 		Pageable pageable = PageRequest.of(page, size, Sort.by(sort));
+		LocalDate filterDate = data != null ? LocalDate.parse(data, DateTimeFormatter.ofPattern("yyyy/MM/dd")) : null;
 		return eventoRepo.findByFilters(nomeEvento, nomeEnte, zonaItalia, regione, provincia, citta, isPassed,
-				pageable);
+				filterDate, pageable);
 	}
+
 }
 
 

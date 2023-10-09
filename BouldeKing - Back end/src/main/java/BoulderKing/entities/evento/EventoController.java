@@ -133,10 +133,11 @@ public class EventoController {
 			@RequestParam(required = false) String nomeEnte,
 			@RequestParam(required = false) String regione, @RequestParam(required = false) String provincia,
 			@RequestParam(required = false) String citta, @RequestParam(required = false) String zonaItalia,
-			@RequestParam(required = false) String isPassed,
+			@RequestParam(required = false) String isPassed, @RequestParam(required = false) String data,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
 			@RequestParam(defaultValue = "id") String sortBy) {
-		return eventoServ.findByFilters(nomeEvento, nomeEnte, regione, provincia, citta, zonaItalia, isPassed, page,
+		return eventoServ.findByFilters(nomeEvento, nomeEnte, regione, provincia, citta, zonaItalia, isPassed, data,
+				page,
 				size, sortBy);
 	}
 
