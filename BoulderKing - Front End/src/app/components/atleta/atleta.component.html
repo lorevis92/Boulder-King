@@ -1,0 +1,36 @@
+<div class="text-center ">
+    <h1 class="coloreTestoPrimario">I KINGS</h1>
+</div>
+<div class="text-center" *ngIf="!atleti">
+    <span class="spinner-grow"></span>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 h-100 rounded-5 d-flex justify-content-center" *ngFor="let atleta of atleti; let i = index">
+            <div class="card mt-5" style="width: 40vh; height: 50vh; overflow: hidden;">
+                <a [routerLink]="[atleta.id]" style="display: block;">
+                    <img [src]="dbImages[i]" alt="Immagine {{atleta.name}}" class="card-img-top img-fluid" style="object-fit: cover; height: 30vh;" />
+               
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title">{{ atleta.name }} {{atleta.surname}}</h5>
+                        </div>
+                        <div class="row">
+                           <!--<div class="col-8">
+                                <p class="card-title">Posizione classifica: {{ atleta.posizioneClassifica }}</p>
+                            </div> --> 
+                         <!--   <div class="col-4"> -->
+                                <p class="card-title">Points: {{ atleta.puntiClassifica }}</p>
+                                <p class="card-title col-6">Vittorie: {{ atleta.primoPosto }}</p>
+                                <p class="card-title col-6">Podi: {{ atleta.numeroPodi }}</p>
+                          <!--  </div> -->
+                        </div>
+                        
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+

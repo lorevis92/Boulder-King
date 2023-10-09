@@ -1,0 +1,37 @@
+<div class="container pt-1" style="max-width:1600px">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="w3-xxxlarge mt-3"><b>{{atleta.name}}  {{atleta.surname}}</b></h1>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+            <img class="w3-image" [src]="dbImage" alt="Immagine {{atleta.name}}" width= 100% >
+            <div *ngIf="atleta.id == userId">
+                <app-immagine></app-immagine>
+            </div>
+            
+        </div>
+        <div class="col-md-6 col-sm-12">
+            <h3>Informazioni su {{atleta.name}}</h3>
+            <p>{{atleta.informazioni}}</p>
+            <!--<p>{{atleta.immagineProfilo?.id}}</p>-->
+            <!--<p><b>Ranking: </b>{{atleta.posizioneClassifica}}</p>-->
+            <p><b>Punti: </b>{{atleta.puntiClassifica}}</p>
+            <p><b>Contatto telefonico:</b> {{atleta.numeroTelefonico}}</p>
+            <p><b>Email:</b> {{atleta.email}}</p>
+        </div>  
+    </div>
+    <!--
+    <div>
+        <h1>Dati statistici personali</h1>
+    </div>
+    <div>
+        <h1>Eventi a cui ha partecipato</h1>
+    </div>
+    <div>
+        <h1>Eventi programmati</h1>
+    </div>
+
+    -->
+    </div>

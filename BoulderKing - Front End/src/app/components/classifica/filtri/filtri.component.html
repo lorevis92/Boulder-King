@@ -1,0 +1,59 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-12">
+          <h2 class="text-white" >
+            Crea le tue classifiche personalizzate e scopri chi è il King della tua zona!
+          </h2 >
+
+          <div class="text-center">
+            <div class="mb-3">
+              <input type="text" [(ngModel)]="citta" placeholder="Città" class="form-control mx-auto" (keyup.enter)="personalizza()">
+              <input type="text" [(ngModel)]="provincia" placeholder="Provincia" class="form-control mx-auto" (keyup.enter)="personalizza()">
+              <input type="text" [(ngModel)]="regione" placeholder="Regione" class="form-control mx-auto" (keyup.enter)="personalizza()">
+              <!--<input type="text" [(ngModel)]="tipoEnte" placeholder="Palestra/ Falesia" class="form-control mx-auto"> Eventualmente da implementare in futuro -->
+              <input type="text" [(ngModel)]="zonaItalia" placeholder="Nord/ Centro/ Sud" class="form-control mx-auto" (keyup.enter)="personalizza()">
+              <button class="btn btn-primary" (click)="personalizza()">Personalizza</button>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+    <div class="row justify-content-center" *ngIf="showClassifica">
+      <div class="cardClassifica col-12 text-center">
+          <div class="text-center mb-3">
+            <h2>Classifica BOULDER KING
+              <ng-container *ngIf="citta"> per {{citta}}</ng-container>
+              <ng-container *ngIf="provincia"> per {{provincia}}</ng-container>
+              <ng-container *ngIf="regione"> in {{regione}}</ng-container>
+              <!--<ng-container *ngIf="nomeEnteSettato && nomeEnte">{{nomeEnte}}</ng-container> Bisogna implementare nuove logiche per vedere chi è il king di ogni singola palestra. Nel caso si fa più avanti -->
+              <!--<ng-container *ngIf="tipoEnte"> nella {{tipoEnte}}</ng-container>Bisogna implementare nuove logiche per vedere chi è il king diviso tra Palestra e Falesia. Nel caso si fa più avanti -->
+              <ng-container *ngIf="zonaItalia"> del {{zonaItalia}} Italia</ng-container>
+            </h2>
+          </div>
+              <table class="col-12 pb-3 text-center">
+                  <thead>
+                    <tr>
+                      <th scope="col ">Ranking</th>
+                      <th scope="col">Nome</th>
+                      <th scope="col">Boulder Points</th>
+                     <!-- <th scope="col">Partecipazioni</th>-->
+                      <th scope="col">Podi</th>
+                      <th scope="col">Vittorie</th>
+                    </tr>
+                  </thead>                
+                    <tbody>
+                      <tr *ngFor="let atleta of atleti ; let i = index">
+                      <th scope="row">{{ i === 0 ? 'BOULDER KING' : i + 1 }}</th>
+                      <td>{{atleta.name}} {{atleta.surname}}</td>
+                      <td>{{atleta.puntiClassifica}}</td>
+                      <!--<td>{{atleta.numeroPartecipazioni}}</td>-->
+                      <td>{{atleta.primoPosto}}</td>
+                      <td>{{atleta.numeroPodi}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+      
+  </div>
+
+

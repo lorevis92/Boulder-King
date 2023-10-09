@@ -1,0 +1,33 @@
+<div class="jumbotron text-center">
+    <h1>BOULDER KING</h1>
+  
+    <p>Diventa il nuovo re dei Boulder!</p>
+  
+  </div>
+  <div class="container mt-5 text-center">
+    <div class="row justify-content-center">
+      <div class="col-md-4 mt-3">
+        <h2>Accesso</h2>
+        <form>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email">
+            <div class="text-danger">{{ emailError }}</div>
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="password">
+            <div class="text-danger">{{ passwordError }}</div>
+          </div>
+          
+          <button (click)="login()" type="submit" class="btn btn-primary">Accedi</button>
+        </form>
+        <p class="mt-3">Non hai un account? <a href="/register">Registrati qui</a>.</p>
+      </div>
+    </div>
+  </div>
+
+<app-toast class="toastRight" #successToast [title]="'Successo'" [message]="'Login effettuato!'"></app-toast>
+<app-toast  #errorToast [title]="'Errore'" [message]="errorResponse"></app-toast>
+
+

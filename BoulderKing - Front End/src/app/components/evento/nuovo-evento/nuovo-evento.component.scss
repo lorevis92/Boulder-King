@@ -1,0 +1,17 @@
+.jumbotron {
+    background-color: rgba(255, 252, 252, 0.616);
+}
+
+.container {
+    background-color: rgba(255, 252, 252, 0.616);
+    box-shadow: 0 0 10px 0px rgba(255, 252, 252, 0.5);
+    }
+
+    .cambiaArena {
+        cursor: pointer; /* Cambia il cursore del mouse quando si passa sopra */
+        transition: color 0.3s; /* Aggiunge una transizione per un effetto fluido */
+      }
+      
+      .cambiaArena:hover {
+        color: #ff0000; /* Cambia il colore del testo quando il mouse è sopra l'elemento */
+      }

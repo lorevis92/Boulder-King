@@ -1,0 +1,25 @@
+#map {
+    height: 80%; /* Imposta l'altezza al 80% del contenitore */
+    width: 80%; /* Imposta la larghezza al 80% del contenitore */
+    margin: 0 auto; /* Per centrare la mappa orizzontalmente */
+    border-radius: 15px; /* Imposta i bordi arrotondati */
+    overflow: hidden; /* Nasconde il contenuto oltre i bordi arrotondati */
+  }
+
+  .google-maps-link {
+    color: #007BFF; /* Colore del testo */
+    text-decoration: none; /* Rimuove il sottolineato del link */
+    font-weight: bold; /* Testo in grassetto */
+    transition: color 0.3s ease-in-out; /* Animazione del colore al passaggio del mouse */
+  
+    /* Stile al passaggio del mouse */
+    &:hover {
+      color: #0056b3; /* Cambia il colore del testo al passaggio del mouse */
+    }
+  }
+ 
+  
+  
+  
+  
+  

@@ -1,0 +1,99 @@
+
+<div class="text-center" *ngIf="!eventi">
+    <span class="spinner-grow"></span>
+</div>
+<div class="container">
+    <div class="row" *ngIf="userId">
+        <div class="col-12 text-center ">
+            <p>
+                <a class="btn btn-danger mt-3" (click)="mostraNuovoEvento = !mostraNuovoEvento">
+                    Creare una nuova Battle
+                </a>
+            </p>
+            <div *ngIf="mostraNuovoEvento">
+                <app-nuovo-evento></app-nuovo-evento> 
+            </div>
+        </div>
+    </div>
+    <div class="row" *ngIf="eventi[0]">
+        <div class="col-12 text-center ">
+            <h1 class="coloreTestoPrimario mt-5">Battles in evidenza</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 h-100 rounded-5 d-flex justify-content-center" *ngFor="let evento of eventi" >
+            <div class="card mt-5" style="width: 18rem; height: fit-content;">
+                <a [routerLink]="[evento.id]">
+                    <img src="{{evento.immagineEvento}}" class="card-img-top img-fluid" style="object-fit: cover; height: 30vh; object-position: top;"
+                    alt="Locandina {{ evento.nomeEvento }}" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ evento.nomeEvento }}</h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <p class="card-title">Boulder Points: {{ evento.puntiEvento }}</p>
+                            </div>
+                            <div class="col-6">
+                                <p class="card-title">Data: {{ evento.data | date:'dd/MM/yyyy'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-12 text-center ">
+            <h1 class="coloreTestoPrimario mt-5">Applica i nostri filtri per trovare gli eventi che ti interessano</h1>
+        </div>
+    </div> 
+    <div class="row"  >
+        <div class="col-md-12 text-center mb-5">
+          <!-- Dropdown per i filtri -->
+          <div class="dropdown">
+            <button class="btn dropdown-toggle filtriBtn" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+              Ricerca le Bulder Battles tramite i nostri filtri personalizzate
+            </button>
+            <div class="dropdown-menu" aria-labelledby="filterDropdown">
+              <div class="text-center mb-3">
+                <input type="text" [(ngModel)]="nomeEvento" placeholder="Nome Boulder Battle" class="form-control" (keyup.enter)="personalizza()">
+                <input type="text" [(ngModel)]="nomeEnte" placeholder="Nome Boulder Arena" class="form-control" (keyup.enter)="personalizza()">
+                <input type="text" [(ngModel)]="citta" placeholder="Città" class="form-control" (keyup.enter)="personalizza()">
+                <input type="text" [(ngModel)]="provincia" placeholder="Provincia" class="form-control" (keyup.enter)="personalizza()">
+                <input type="text" [(ngModel)]="regione" placeholder="Regione" class="form-control" (keyup.enter)="personalizza()">
+                <input type="text" [(ngModel)]="zonaItalia" placeholder="Nord/Centro/Sud" class="form-control" (keyup.enter)="personalizza()">
+                <input type="text" [(ngModel)]="isPassed" placeholder="Passato/Futuro" class="form-control" (keyup.enter)="personalizza()">
+                <!--<input type="date" [(ngModel)]="date" placeholder="Data" class="form-control" (keyup.enter)="personalizza()"> -->
+              
+                <!--  Idee per implementazioni future
+                <input type="text" [(ngModel)]="tipoEnte" placeholder="Palestra/ Falesia" class="form-control">
+                <input type="text" [(ngModel)]="idEnte" placeholder="id ente" class="form-control">
+                <input type="text" [(ngModel)]="zonaItalia" placeholder="Nord/ Centro/ Sud" class="form-control">
+                <input type="text" [(ngModel)]="dataSpecifica" placeholder="Data specifica aaaa/mm/gg" class="form-control">
+                <input type="text" [(ngModel)]="dataMese" placeholder="Un mese di un anno aaaa/mm" class="form-control">
+                <input type="text" [(ngModel)]="dataAnno" placeholder="Un mese di un anno aaaa" class="form-control"> -->
+                <button class="btn btn-primary" (click)="personalizza()">Personalizza</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    
+    <div class="row mb-5" *ngIf="mostraEventiPersonalizzati">   
+        <div class="col-lg-4 col-md-6 col-sm-12 h-100 rounded-5 d-flex justify-content-center" *ngFor="let evento of eventiFiltrati">
+            <div class="card mt-5 mb-5" style="width: 18rem;">
+                <a [routerLink]="[evento.id]">
+                    <img src="{{evento.immagineEvento}}" class="card-img-top img-fluid" style="object-fit: cover; height: 30vh; object-position: top;"
+                    alt="Locandina {{ evento.nomeEvento }}" />
+                    <div class="card-body">
+                        <h5 class="card-title">{{ evento.nomeEvento }}</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+
+

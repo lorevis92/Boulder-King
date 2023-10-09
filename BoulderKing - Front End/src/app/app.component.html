@@ -1,0 +1,13 @@
+<div class="bgColor" *ngIf="shouldShowNavbar()">
+  <app-navbar></app-navbar>
+</div>
+<div class="centerContainer text-center">
+  <router-outlet></router-outlet>
+</div>
+<div>
+  <p>Spazio nascosto dal footer che fa si che il footer non nasconda altre parti di contenuto</p>
+</div>
+<app-footer></app-footer>
+
+
+

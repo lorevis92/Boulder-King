@@ -1,0 +1,20 @@
+.container{
+    background-color: rgba(0, 0, 0, 0.719);
+    color: rgb(209, 209, 209);
+}
+
+.card-body
+{
+    color: rgb(209, 209, 209);
+}
+
+a {
+    color: rgb(255, 255, 255); /* Colore del testo dei link non visitati (bianco) */
+    text-decoration: none; /* Rimuove la sottolineatura dei link */
+    transition: color 0.3s; /* Animazione per il cambio di colore al passaggio del mouse */
+  }
+  
+  /* Stile per i link al passaggio del mouse (hover) */
+  a:hover {
+    color: #00bcd4; /* Cambia il colore del testo al passaggio del mouse */
+  }

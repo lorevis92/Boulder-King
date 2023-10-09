@@ -1,0 +1,56 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form class = "text-center">
+          <div class="mb-3">
+            <label for="nomeEvento" class="form-label">Nome della Battle</label>
+            <input type="text" class="form-control" id="nomeEvento" name="nomeEvento" required [(ngModel)]="nomeEvento" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="data" class="form-label">Data (aaaa-mm-gg)</label>
+            <!-- Input per l'organizzatore -->
+            <input type="text" class="form-control" id="data" name="data" required [(ngModel)]="data" (keyup.enter)="aggiornaDati()">
+            <!-- Lista di suggerimenti -->
+          </div>
+          <div class="mb-3">
+            <label for="immagineEvento" class="form-label">Url foto dell'evento</label>
+            <input type="immagineEvento" class="form-control" id="immagineEvento" name="immagineEvento" required [(ngModel)]="immagineEvento" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="Citta" class="form-label">Città</label>
+            <input type="Citta" class="form-control" id="Citta" name="Citta" required [(ngModel)]="citta" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="Provincia" class="form-label">Provincia</label>
+            <input type="Provincia" class="form-control" id="Provincia" name="Provincia" required [(ngModel)]="provincia" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="Regione" class="form-label">Regione</label>
+            <input type="Regione" class="form-control" id="Regione" name="Regione" required [(ngModel)]="regione" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="zonaItalia" class="form-label">Seleziona una zona in Italia</label>
+            <select class="form-select" id="zonaItalia" name="zonaItalia" required [(ngModel)]="zonaItalia" (keyup.enter)="aggiornaDati()">
+              <option value="Nord">Nord</option>
+              <option value="Centro">Centro</option>
+              <option value="Sud">Sud</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="info" class="form-label">Informazioni</label>
+            <input type="info" class="form-control" id="info" name="info" required [(ngModel)]="info" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="sito" class="form-label">Url sito della Battle</label>
+            <input type="sito" class="form-control" id="sito" name="sito" required [(ngModel)]="sito" (keyup.enter)="aggiornaDati()">
+          </div>
+          
+
+          <button (click)="aggiornaDati()" type="submit" class="btn btn-danger mb-5">Aggiorna</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  

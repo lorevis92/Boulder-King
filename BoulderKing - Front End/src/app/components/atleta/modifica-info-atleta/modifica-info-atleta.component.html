@@ -1,0 +1,47 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form>
+          <div class="mb-3 mt-3">
+            <label for="name" class="form-label">Nome</label>
+            <input type="text" class="form-control" id="name" name="name" required [(ngModel)]="name" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="surname" class="form-label">Cognome</label>
+            <!-- Input per l'organizzatore -->
+            <input type="text" class="form-control" id="surname" name="surname" required [(ngModel)]="surname" (keyup.enter)="aggiornaDati()">
+            <!-- Lista di suggerimenti -->
+          </div>
+          <div class="mb-3">
+            <label for="userName" class="form-label">User name</label>
+            <input type="userName" class="form-control" id="userName" name="userName" required [(ngModel)]="userName" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="Citta" class="form-label">Città</label>
+            <input type="Citta" class="form-control" id="Citta" name="Citta" required [(ngModel)]="citta" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="Provincia" class="form-label">Provincia</label>
+            <input type="Provincia" class="form-control" id="Provincia" name="Provincia" required [(ngModel)]="provincia" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="Regione" class="form-label">Regione</label>
+            <input type="Regione" class="form-control" id="Regione" name="Regione" required [(ngModel)]="regione" (keyup.enter)="aggiornaDati()">
+          </div>
+          <div class="mb-3">
+            <label for="zonaItalia" class="form-label">Seleziona una zona in Italia</label>
+            <select class="form-select" id="zonaItalia" name="zonaItalia" required [(ngModel)]="zonaItalia" (keyup.enter)="aggiornaDati()">
+              <option value="Nord">Nord</option>
+              <option value="Centro">Centro</option>
+              <option value="Sud">Sud</option>
+            </select>
+          </div>
+          
+          <button (click)="aggiornaDati()" type="submit" class="btn btn-danger mb-5">Aggiorna</button>
+        </form>
+        
+      </div>
+    </div>
+  </div>
+
+  

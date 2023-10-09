@@ -1,0 +1,77 @@
+.coloreTestoPrimario {
+    color: rgba(238, 224, 245, 0.685);
+    font-size: 1.5rem;
+}
+
+.coloreTestoAttivo {
+    color: rgb(249, 235, 255);
+    font-size: 1.6rem;
+}
+
+.coloreTestoPrimarioForte {
+    color: rgb(249, 235, 255);
+}
+
+.coloreTestoAttivoForte {
+    color: rgb(249, 235, 255);
+    font-size: 2rem;
+}
+
+nav {
+    //background-color: rgba(245, 227, 253, 0);
+    background-color: black;
+}
+
+.navbar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;  // Per fare in modo che l'elemento before sia posizionato correttamente
+    
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 30px;  // Puoi regolare l'altezza secondo le tue necessità
+      //background: linear-gradient(to bottom, rgb(104, 56, 56), rgba(0, 0, 0, 0));
+      z-index: 1;  // Per essere sicuri che sia sopra gli altri elementi della navbar
+    }
+}
+
+.navbar-nav, .navbar-toggler, .navbar-brand, .dropdown {
+    z-index: 2; // O un qualsiasi numero superiore a quello del gradiente
+    position: relative; // Per fare in modo che z-index funzioni
+}
+
+/* Pulsante Accedi */
+.btn-primary {
+    background-color: #245c97; /* Sfondo trasparente */
+    color: white; /* Colore del testo quando non è premuto */
+    border: 1px solid #007bff; /* Bordo sottile del colore del testo quando non è premuto */
+    transition: background-color 0.3s, color 0.3s; /* Transizione per il cambio di colore su hover */
+  }
+  
+  .btn-primary:hover {
+    background-color: #007bff; /* Colore di sfondo su hover */
+    color: #fff; /* Colore del testo su hover */
+  }
+  
+  /* Pulsante Registrati */
+  .btn-success {
+    background-color: #0e571f; /* Sfondo trasparente */
+    color: white; /* Colore del testo quando non è premuto */
+    border: 1px solid #28a745; /* Bordo sottile del colore del testo quando non è premuto */
+    transition: background-color 0.3s, color 0.3s; /* Transizione per il cambio di colore su hover */
+  }
+  
+  .btn-success:hover {
+    background-color: #28a745; /* Colore di sfondo su hover */
+    color: #fff; /* Colore del testo su hover */
+  }
+  
+  .jumbotron {
+   margin-top: 5rem;
+  }
+  

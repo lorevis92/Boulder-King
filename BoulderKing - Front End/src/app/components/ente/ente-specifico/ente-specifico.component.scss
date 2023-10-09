@@ -1,0 +1,24 @@
+.container{
+    background-color: rgba(240, 248, 255, 0.808);
+}
+
+a {
+    color: rgb(26, 25, 25); /* Colore del testo dei link non visitati (bianco) */
+    text-decoration: none; /* Rimuove la sottolineatura dei link */
+    transition: color 0.3s; /* Animazione per il cambio di colore al passaggio del mouse */
+  }
+  
+  /* Stile per i link al passaggio del mouse (hover) */
+  a:hover {
+    color: #00bcd4; /* Cambia il colore del testo al passaggio del mouse */
+  }
+
+  .specialp {
+    text-decoration: underline;
+    color:rgb(39, 39, 39);
+  }
+
+  .specialp:hover{
+    text-decoration: underline;
+    cursor: pointer; 
+  }

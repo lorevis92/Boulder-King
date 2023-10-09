@@ -1,0 +1,125 @@
+<div class="container pt-1" style="max-width:1600px">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="w3-xxxlarge mt-3"><b>{{evento.nomeEvento}}</b></h1>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-6 col-sm-12">
+            <img class="w3-image" src={{evento.immagineEvento}} alt="{{evento.nomeEvento}}" width= 100% >
+        </div>
+        <div class="col-md-6 col-sm-12 mt-3 text-start">
+            <h3>Informazioni su {{evento.nomeEvento}}</h3>
+            <p *ngIf="evento.info"> {{evento.info}}</p>
+            <p><b>Boulder Arena: </b> <a [routerLink]="['/ente', evento.organizzatore?.id]" class="linkSottolineato">{{evento.organizzatore?.nomeEnte}}</a></p>
+            <p *ngIf="evento.data"><b>Data: </b>{{evento.data | date:'dd/MM/yyyy'}}</p>
+            <p *ngIf="evento.citta && evento.provincia && evento.regione"><b>Località:</b> {{evento.citta}} in provincia di {{evento.provincia}}, {{evento.regione}}</p>
+           <!-- <p><b>Boulder Points per il vincitore:</b> {{evento.puntiEvento}}</p> -->
+            <p *ngIf="evento.sito"><b>Scopri di più su: </b><a href="{{ evento.sito }}" target="_blank" class="linkSottolineato">Link al sito dell'evento</a></p>
+            <p *ngIf="evento.isPassed === 'PASSATO'"><b>Classifica della Boulder Battle:</b>
+                <a *ngIf="(isClassificaPresent)" [routerLink]="['/classifica-evento', evento.id]" style="display: inline;" class="btn ms-3 btn-primary d-block d-md-inline mt-3"> Visualizza!</a> 
+                <a *ngIf="!(isClassificaPresent) && (userId == evento.creatoreEvento || userLoggato.role == 'ADMIN')" (click)="creaClassifica()" style="display: inline;" class="btn ms-3 btn-danger "> Crea!</a>
+                <!--Inserire anche la condizione per poter aggiornare la classifica: solo se l'user loggato è ADMIN o creatore dell'evento può intervenire sulla classifica -->
+                <a *ngIf="(isClassificaPresent) && (userId == evento.creatoreEvento || userLoggato.role == 'ADMIN')" [routerLink]="['/classifica-aggiungi-partecipanti', classifica.id]" style="display: inline;" class="btn ms-3 btn-primary d-block d-md-inline mt-3"> Aggiorna!</a> 
+                <span *ngIf="!(isClassificaPresent) && userId !== evento.creatoreEvento" style="display: inline;"> La classifica sarà disponibile a breve!</span>
+            </p>
+            <div class=" text-center mt-2">
+                <button *ngIf="userId == evento.creatoreEvento || userLoggato.role == 'ADMIN'" (click)="visualizzaAggiornaDati()" type="submit" class="btn btn-danger mb-3 text-center">Aggiorna i dati dati dell'evento</button>
+            </div>
+            <app-modifica-info-evento *ngIf="visualizzaModificatore"></app-modifica-info-evento>
+            <div class=" text-center mt-2">
+                <button *ngIf="userId == evento.creatoreEvento || userLoggato.role == 'ADMIN'" (click)="eliminaEvento()" type="submit" class="btn btn-danger mb-5 text-center">Elimina l'evento</button>
+            </div>
+        </div>  
+    </div>
+  
+    <!-- Iscrizione all'evento -->
+
+    <div class="row" *ngIf="mostraIscrizioneEvento && userId && evento.isPassed === 'FUTURO'">
+        <div class="col-12 text-center ">
+            <p>
+                <a class="btn btn-danger mt-5" (click)="iscrizioneEvento()">
+                    Sei interessato alla Battle? clicca qui!
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Sezione atleti che partecipano all'evento -->
+    <div class="row" *ngIf="evento">
+        <div class="col-12 text-center">
+            <h3 class="w3-xxxlarge mt-3 mb-3"><b>Atleti interessati alla Battle</b></h3>
+            <p *ngIf="atleti.length === 0 && mostraIscrizioneEvento && userId && evento.isPassed === 'FUTURO'">Dimostra per primo l'interesse per questa Battle!</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 h-100 rounded-5 d-flex justify-content-center" *ngFor="let atleta of atleti; let i = index">
+            <div class="card mt-5" style="width: 40vh; height: 50vh; overflow: hidden;">
+                <a [routerLink]="['/atleta/' + atleta.id]" style="display: block;">
+                    <img [src]="dbImages[i]" alt="Immagine {{atleta.name}}" class="card-img-top img-fluid" style="object-fit: cover; height: 30vh;" />
+               
+                    <div class="card-body">
+                        <div class="row">
+                            <h5 class="card-title">{{ atleta.name }} {{atleta.surname}}</h5>
+                        </div>
+                        <div class="row">
+                           <!--<div class="col-8">
+                                <p class="card-title">Posizione classifica: {{ atleta.posizioneClassifica }}</p>
+                            </div> --> 
+                         <!--   <div class="col-4"> -->
+                                <p class="card-title">Points: {{ atleta.puntiClassifica }}</p>
+                                <p class="card-title col-6">Vittorie: {{ atleta.primoPosto }}</p>
+                                <p class="card-title col-6">Podi: {{ atleta.numeroPodi }}</p>
+                          <!--  </div> -->
+                        </div>
+                        
+                    </div>
+                </a>
+            </div>
+            
+        </div>
+    </div> 
+<!--
+<div class="row mt-3">
+    <div class="col-12 d-flex justify-content-center"> 
+        <button class="btn m-1" (click)="previousPage()">Pagina precedente</button>
+        <button class="btn m-1" (click)="nextPage()">Pagina successiva</button>
+    </div>
+</div> -->
+
+<!-- Sezione altri eventi eventi che sono organizzati dallo stesso ente -->
+
+    <div class="row mt-3">
+        <div class="col-12 d-flex justify-content-center">
+            <h3 class="w3-xxxlarge mt-3"><b>Battles sull'Arena {{evento.organizzatore?.nomeEnte}}</b></h3>
+        </div>
+    </div>
+    
+    <div class=" row">
+        <div class="col-lg-4 col-md-6 col-sm-12 h-100 rounded-5 d-flex justify-content-center" *ngFor="let evento of eventiByOrganizzatore">
+           
+                <a [routerLink]="['/evento/' + evento.id]" (click)="scrollToTop()">
+                    <div class="card mt-5" style="width: 18rem;">
+                        <img src="{{evento.immagineEvento}}" class="card-img-top"
+                            alt="Locandina {{ evento.nomeEvento }}" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ evento.nomeEvento }}</h5>
+                        </div>
+                    </div>
+                </a>
+        </div>
+    </div> 
+     <!-- 
+    <div class="row mt-3 text-center">
+        <div class="col-12 d-flex justify-content-center">
+            <button class="btn m-1" (click)="previousPageOrganizzatore()">Pagina precedente</button>
+            <button class="btn m-1" (click)="nextPageOrganizzatore()">Pagina successiva</button>
+        </div>
+    </div>
+</div>   -->
+    
+<app-toast  #noNextEventiPageToast [title]="'Errore'" [message]="'Non ci sono più eventi disponibili'"></app-toast>
+<app-toast  #noNextAtletiPageToast [title]="'Errore'" [message]="'Non ci altri atleti iscritti a questo evento'"></app-toast>
+<app-toast  #successRegistrazioneToast [title]="'Errore'" [message]="'Ora dai parte dalle persone interessate a questo evento!'"></app-toast>
+<app-toast  #successClassificaToast [title]="'Errore'" [message]="'Classifica creata con successo'"></app-toast>

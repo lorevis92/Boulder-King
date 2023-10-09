@@ -1,0 +1,113 @@
+// Definizione delle variabili
+$coloreTestoPrimario: rgba(238, 224, 245, 0.685);
+$fontDimensioneBase: 1.5rem;
+
+$coloreSfondoBody: url('https://img.freepik.com/free-photo/free-climber-female-bouldering-indoors-back-view_613910-15718.jpg?w=740&t=st=1694437184~exp=1694437784~hmac=20e61e29583c0c8c3b88f83718fb5f37871f6d6334d24f541eac8da654c68948');
+$coloreSfondoBodyAlternative: url('https://img.freepik.com/free-vector/detailed-wireframe-modern-techno-landscape-design_1048-12355.jpg?w=826&t=st=1694422870~exp=1694423470~hmac=0d6d0bd317628c103ad309ce8a6c13c13292faec9af9a13dd48a269aa93cd679');
+
+$coloreCard: linear-gradient(49deg, #3c3c3f60 0, #fc62775e 58%, #ffcdcd6b 95%);
+$dimensioneCard: 30rem;
+$altezzaCard: 15rem;
+
+$coloreCardClassifica: linear-gradient(49deg, #857c5460 0, #81817f 30%, #fc62775e 58%, #50010188 95%);
+$dimensioneCardClassifica: 60rem;
+$altezzaCardClassifica: 30rem;
+
+$coloreBtn: #f8baba57;
+$coloreCardBody: rgb(209, 209, 209);
+
+// Stili globali
+.coloreTestoPrimario {
+    color: $coloreTestoPrimario;
+    font-size: $fontDimensioneBase;
+}
+
+body {
+    background-image: $coloreSfondoBody;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+body.tema-alternativo {
+    background-image: $coloreSfondoBodyAlternative;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+.card {
+    background: $coloreCard;
+    height: $altezzaCard;
+    border-radius: 12px;
+    position: relative;
+    transition: all .3s;
+    margin: 1rem;
+    overflow-y: auto;
+}
+
+
+.card::-webkit-scrollbar {
+    width: 0em;
+}
+
+.card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}
+
+.cardClassifica {
+    background: rgba(0, 0, 0, 0.342);
+    width: 80%;
+    height: 100%;
+    border-radius: 12px;
+    position: relative;
+    margin: 1rem;
+    color: white;
+    padding-top: 1rem;
+}
+
+.card-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 50px 40px;
+    background-color: rgba(34, 34, 34, 0.25);
+    color: #ffffff;
+    border-radius: 12px;
+    transition: 0.2s ease;
+}
+
+.card:hover {
+    transform: translateX(-5px) scale(1.2);
+    box-shadow: 0 10px 10px rgba(rgb(236, 230, 230), 0.662);
+}
+
+.filtriBtn{
+    background-color: rgba(34, 34, 34, 0.25);
+    color: #ffffff;
+    border-radius: 12px;
+}
+
+.filtriBtn:hover {
+    transform: translateX(-5px) scale(1.2);
+    background-color: rgba(78, 13, 13, 0.25);
+    box-shadow: 0 10px 10px rgba(rgb(236, 230, 230), 0.662);
+    color: #ffffff;
+}
+
+a {
+    text-decoration: none;
+}
+
+.btn {
+    background-color: $coloreBtn;
+}
+
+.card-body {
+    color: $coloreCardBody;
+}
+

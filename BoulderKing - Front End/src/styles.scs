@@ -1,0 +1,40 @@
+/* You can add global styles to this file, and also import other style files */
+body {
+  background-image: url("https://img.freepik.com/free-vector/detailed-wireframe-modern-techno-landscape-design_1048-12355.jpg?w=826&t=st=1694422870~exp=1694423470~hmac=0d6d0bd317628c103ad309ce8a6c13c13292faec9af9a13dd48a269aa93cd679");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.card {
+  background: linear-gradient(49deg, rgba(45, 78, 224, 0.3764705882) 0, #9f71f0 30%, rgba(252, 98, 119, 0.368627451) 58%, #f8ef6f 95%);
+  width: 30rem;
+  height: 15rem;
+  border-radius: 12px;
+  position: relative;
+  transition: all 0.3s;
+  margin: 1rem;
+}
+
+.card-container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 50px 40px;
+  background-color: rgba(34, 34, 34, 0.2549019608);
+  color: #ffffff;
+  border-radius: 12px;
+  transition: 0.2s ease;
+}
+
+.card:hover {
+  transform: translateX(-5px) scale(1.2);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.662);
+}
+
+a {
+  text-decoration: none;
+}
+
+/*# sourceMappingURL=styles.scs.map */

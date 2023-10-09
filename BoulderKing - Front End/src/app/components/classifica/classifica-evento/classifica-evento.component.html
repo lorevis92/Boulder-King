@@ -1,0 +1,123 @@
+<div class="container">
+ <h1 class="text-white text-center">Classifica dell'evento {{classifica.evento.nomeEvento}}</h1>
+    <div class="row justify-content-center">
+        <div class="cardClassifica col-12 text-center">
+                <table class="col-12 mb-3 text-center">
+                    <thead>
+                      <tr>
+                        <th scope="col ">Posizione</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Boulder Points Battle</th>
+                        <th scope="col">Boulder Points totali</th>
+                        <th scope="col">Vittorie</th>
+                        <th scope="col">Podi</th>
+                        <!--<th scope="col">Partecipazioni</th>-->
+                        <!--<th scope="col">Ranking</th>-->
+                      </tr>
+                    </thead>              
+                      <tbody>
+                        <tr >
+                        <th scope="row" *ngIf="classifica.posizione01">1</th>
+                        <td>{{classifica.posizione01.name}} {{classifica.posizione01.surname}}</td>
+                        <td>150</td>
+                        <td>{{classifica.posizione01.puntiClassifica}}</td>
+                        <td>{{classifica.posizione01.primoPosto}}</td>
+                        <td>{{classifica.posizione01.numeroPodi}}</td>
+                       <!-- <td>{{classifica.posizione01.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione01?.posizioneClassifica}}</td> -->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione02">2</th>
+                        <td>{{classifica.posizione02.name}} {{classifica.posizione02.surname}}</td>
+                        <td>125</td>
+                        <td>{{classifica.posizione02.puntiClassifica}}</td>
+                        <td>{{classifica.posizione02.primoPosto}}</td>
+                        <td>{{classifica.posizione02.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione02.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione02?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione03">3</th>
+                        <td>{{classifica.posizione03.name}} {{classifica.posizione03.surname}}</td>
+                        <td>100</td>
+                        <td>{{classifica.posizione03.puntiClassifica}}</td>
+                        <td>{{classifica.posizione03.primoPosto}}</td>
+                        <td>{{classifica.posizione03.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione03.numeroPartecipazioni}}</td>-->
+                        <!--<td>{{classifica.posizione03?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione04">4</th>
+                        <td>{{classifica.posizione04.name}} {{classifica.posizione04.surname}}</td>
+                        <td>75</td>
+                        <td>{{classifica.posizione04.puntiClassifica}}</td>
+                        <td>{{classifica.posizione04.primoPosto}}</td>
+                        <!--<td>{{classifica.posizione04.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione04.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione04?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione05">5</th>
+                        <td>{{classifica.posizione05.name}} {{classifica.posizione05.surname}}</td>
+                        <td>50</td>
+                        <td>{{classifica.posizione05.puntiClassifica}}</td>
+                        <td>{{classifica.posizione05.primoPosto}}</td>
+                        <td>{{classifica.posizione05.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione05.numeroPartecipazioni}}</td>-->
+                        <!--<td>{{classifica.posizione05?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione06">6</th>
+                        <td>{{classifica.posizione06.name}} {{classifica.posizione06.surname}}</td>
+                        <td>25</td>
+                        <td>{{classifica.posizione06.puntiClassifica}}</td>
+                        <td>{{classifica.posizione06.primoPosto}}</td>
+                        <td>{{classifica.posizione06.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione06.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione06?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione07">7</th>
+                        <td>{{classifica.posizione07.name}} {{classifica.posizione07.surname}}</td>
+                        <td>25</td>
+                        <td>{{classifica.posizione07.puntiClassifica}}</td>
+                        <td>{{classifica.posizione07.primoPosto}}</td>
+                        <td>{{classifica.posizione07.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione07.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione07?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione08">8</th>
+                        <td>{{classifica.posizione08.name}} {{classifica.posizione08.surname}}</td>
+                        <td>25</td>
+                        <td>{{classifica.posizione08.puntiClassifica}}</td>
+                        <td>{{classifica.posizione08.primoPosto}}</td>
+                        <td>{{classifica.posizione08.numeroPodi}}</td>
+                       <!-- <td>{{classifica.posizione08.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione08?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione09">9</th>
+                        <td>{{classifica.posizione09.name}} {{classifica.posizione09.surname}}</td>
+                        <td>25</td>
+                        <td>{{classifica.posizione09.puntiClassifica}}</td>
+                        <td>{{classifica.posizione09.primoPosto}}</td>
+                        <td>{{classifica.posizione09.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione09.numeroPartecipazioni}}</td>-->
+                        <!--<td>{{classifica.posizione09?.posizioneClassifica}}</td>-->
+                      </tr>
+                      <tr >
+                        <th scope="row" *ngIf="classifica.posizione10">10</th>
+                        <td>{{classifica.posizione10.name}} {{classifica.posizione10.surname}}</td>
+                        <td>25</td>
+                        <td>{{classifica.posizione10.puntiClassifica}}</td>
+                        <td>{{classifica.posizione10.primoPosto}}</td>
+                        <td>{{classifica.posizione10.numeroPodi}}</td>
+                        <!--<td>{{classifica.posizione10.numeroPartecipazioni}}</td>-->
+                       <!-- <td>{{classifica.posizione10?.posizioneClassifica}}</td>-->
+                      </tr>
+                    </tbody> 
+                  </table>
+            </div>
+    </div>
+</div>

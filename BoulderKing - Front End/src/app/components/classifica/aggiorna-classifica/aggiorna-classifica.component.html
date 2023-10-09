@@ -1,0 +1,123 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <form>
+          <div class="mb-3 mt-3 text-center">
+            <label for="posizione01" class="form-label text-white">Primo classificato</label>
+            <input type="text" class="form-control" id="posizione01" name="posizione01" required [(ngModel)]="atleta01" (input)="searchAtleta01()">
+            <ul class="list-group" *ngIf="mostraTendina01 && atleti01.length > 0">
+              <li class="list-group-item" *ngFor="let atleta01 of atleti01" (click)="selectAtleta01(atleta01)">{{ atleta01.surname + ' ' + atleta01.name }}</li>
+            </ul>
+            <div *ngIf="!mostraTendina01">
+              <p class="text-success cambiaArena mt-3" (click)="mostraTendina01 = true">Vuoi cambiare il primo classificato? Clicca qui!</p>
+            </div>
+          </div>
+          
+          <div class="mb-3 mt-3 text-center">
+            <label for="posizione02" class="form-label text-white">Secondo classificato</label>
+            <input type="text" class="form-control" id="posizione02" name="posizione02" required [(ngModel)]="atleta02" (input)="searchAtleta02()">
+            <ul class="list-group" *ngIf="mostraTendina02 && atleti02.length > 0">
+              <li class="list-group-item" *ngFor="let atleta02 of atleti02" (click)="selectAtleta02(atleta02)">{{ atleta02.surname + ' ' + atleta02.name }}</li>
+            </ul>
+            <div *ngIf="!mostraTendina02">
+              <p class="text-success cambiaArena mt-3" (click)="mostraTendina02 = true">Vuoi cambiare il secondo classificato? Clicca qui!</p>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-3 text-center">
+            <label for="posizione03" class="form-label text-white">Terzo classificato</label>
+            <input type="text" class="form-control" id="posizione03" name="posizione03" required [(ngModel)]="atleta03" (input)="searchAtleta03()">
+            <ul class="list-group" *ngIf="mostraTendina03 && atleti03.length > 0">
+              <li class="list-group-item" *ngFor="let atleta03 of atleti03" (click)="selectAtleta03(atleta03)">{{ atleta03.surname + ' ' + atleta03.name }}</li>
+            </ul>
+            <div *ngIf="!mostraTendina03">
+              <p class="text-success cambiaArena mt-3" (click)="mostraTendina03 = true">Vuoi cambiare il terzo classificato? Clicca qui!</p>
+            </div>
+          </div>
+
+         <div class="mb-3 mt-3 text-center">
+            <label for="posizione04" class="form-label text-white">Quarto classificato</label>
+            <input type="text" class="form-control" id="posizione04" name="posizione04" required [(ngModel)]="atleta04" (input)="searchAtleta04()">
+            <ul class="list-group" *ngIf="mostraTendina04 && atleti04.length > 0">
+              <li class="list-group-item" *ngFor="let atleta04 of atleti04" (click)="selectAtleta04(atleta04)">{{ atleta04.surname + ' ' + atleta04.name }}</li>
+            </ul>
+            <div *ngIf="!mostraTendina04">
+              <p class="text-success cambiaArena mt-3" (click)="mostraTendina04 = true">Vuoi cambiare il 1uarto classificato? Clicca qui!</p>
+            </div>
+          </div>
+
+          <div class="mb-3 mt-3 text-center">
+            <label for="posizione05" class="form-label text-white">Quinto classificato</label>
+            <input type="text" class="form-control" id="posizione05" name="posizione05" required [(ngModel)]="atleta05" (input)="searchAtleta05()">
+            <ul class="list-group" *ngIf="mostraTendina05 && atleti05.length > 0">
+              <li class="list-group-item" *ngFor="let atleta05 of atleti05" (click)="selectAtleta05(atleta05)">{{ atleta05.surname + ' ' + atleta05.name }}</li>
+            </ul>
+            <div *ngIf="!mostraTendina05">
+              <p class="text-success cambiaArena mt-3" (click)="mostraTendina05 = true">Vuoi cambiare il quinto classificato? Clicca qui!</p>
+            </div>
+          </div>  
+         
+          <div class="mb-3 mt-3 text-center">
+            <label for="posizione06" class="form-label text-white">Sesto classificato</label>
+            <input type="text" class="form-control" id="posizione06" name="posizione06" required [(ngModel)]="atleta06" (input)="searchAtleta06()">
+            <ul class="list-group" *ngIf="mostraTendina06 && atleti06.length > 0">
+              <li class="list-group-item" *ngFor="let atleta06 of atleti06" (click)="selectAtleta06(atleta06)">{{ atleta06.surname + ' ' + atleta06.name }}</li>
+            </ul>
+            <div *ngIf="!mostraTendina06">
+              <p class="text-success cambiaArena mt-3" (click)="mostraTendina06 = true">Vuoi cambiare il sesto classificato? Clicca qui!</p>
+            </div>
+          </div>  
+          
+            <div class="mb-3 mt-3 text-center">
+              <label for="posizione07" class="form-label text-white">Settimo classificato</label>
+              <input type="text" class="form-control" id="posizione07" name="posizione07" required [(ngModel)]="atleta07" (input)="searchAtleta07()">
+              <ul class="list-group" *ngIf="mostraTendina07 && atleti07.length > 0">
+                <li class="list-group-item" *ngFor="let atleta07 of atleti07" (click)="selectAtleta07(atleta07)">{{ atleta07.surname + ' ' + atleta07.name }}</li>
+              </ul>
+              <div *ngIf="!mostraTendina07">
+                <p class="text-success cambiaArena mt-3" (click)="mostraTendina07 = true">Vuoi cambiare il settimo classificato? Clicca qui!</p>
+              </div>
+            </div>
+          
+            <div class="mb-3 mt-3 text-center">
+              <label for="posizione08" class="form-label text-white">Ottavo classificato</label>
+              <input type="text" class="form-control" id="posizione08" name="posizione08" required [(ngModel)]="atleta08" (input)="searchAtleta08()">
+              <ul class="list-group" *ngIf="mostraTendina08 && atleti08.length > 0">
+                <li class="list-group-item" *ngFor="let atleta08 of atleti08" (click)="selectAtleta08(atleta08)">{{ atleta08.surname + ' ' + atleta08.name }}</li>
+              </ul>
+              <div *ngIf="!mostraTendina08">
+                <p class="text-success cambiaArena mt-3" (click)="mostraTendina08 = true">Vuoi cambiare il ottavo classificato? Clicca qui!</p>
+              </div>
+            </div>
+          
+            <div class="mb-3 mt-3 text-center">
+              <label for="posizione09" class="form-label text-white">Nono classificato</label>
+              <input type="text" class="form-control" id="posizione09" name="posizione09" required [(ngModel)]="atleta09" (input)="searchAtleta09()">
+              <ul class="list-group" *ngIf="mostraTendina09 && atleti09.length > 0">
+                <li class="list-group-item" *ngFor="let atleta09 of atleti09" (click)="selectAtleta09(atleta09)">{{ atleta09.surname + ' ' + atleta09.name }}</li>
+              </ul>
+              <div *ngIf="!mostraTendina09">
+                <p class="text-success cambiaArena mt-3" (click)="mostraTendina09 = true">Vuoi cambiare il nono classificato? Clicca qui!</p>
+              </div>
+            </div>
+          
+            <div class="mb-3 mt-3 text-center">
+              <label for="posizione10" class="form-label text-white">Decimo classificato</label>
+              <input type="text" class="form-control" id="posizione10" name="posizione10" required [(ngModel)]="atleta10" (input)="searchAtleta10()">
+              <ul class="list-group" *ngIf="mostraTendina10 && atleti10.length > 0">
+                <li class="list-group-item" *ngFor="let atleta10 of atleti10" (click)="selectAtleta10(atleta10)">{{ atleta10.surname + ' ' + atleta10.name }}</li>
+              </ul>
+              <div *ngIf="!mostraTendina10">
+                <p class="text-success cambiaArena mt-3" (click)="mostraTendina10 = true">Vuoi cambiare il decimo classificato? Clicca qui!</p>
+              </div>
+            </div>
+          <div class="text-center mb-5 mt-5">
+            <button (click)="aggiornaPosizioniClassifica()" type="submit" class="btn btn-danger">Aggiorna Classifica</button>
+          </div>
+          </form>
+        <!--
+          <p class="mt-3 text-center"><a class="text-white" [routerLink]="['/classifica-evento', this.evento.id]">CLASSIFICA ATTUALE</a></p>
+        -->
+        </div>
+    </div>
+  </div>

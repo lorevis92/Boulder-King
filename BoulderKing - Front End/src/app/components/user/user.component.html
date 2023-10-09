@@ -1,0 +1,64 @@
+<div class="container pt-1" style="max-width:1600px" *ngIf="user.tipoUser == 'ATLETA'">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1 class="w3-xxxlarge mt-3"><b>{{user.name}}</b></h1>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-6">
+            <img class="w3-image" [src]="dbImage" alt="Immagine {{user.name}}" width= 100% >
+            <app-immagine></app-immagine>
+        </div>
+        <div class="col-6">
+            <h3>Informazioni su {{user.name}}</h3>
+            <p>{{user.informazioni}}</p>
+            <!--<p>{{user.immagineProfilo?.id}}</p> -->
+            <!--<p><b>Ranking: </b>{{user.posizioneClassifica}}</p>-->
+            <p><b>Boulder Points: </b>{{user.puntiClassifica}}</p>
+            <p><b>Anagrafica classifica:</b> {{user.citta}} - {{user.provincia}} - {{user.regione}} - {{user.zonaItalia}} -</p>
+            
+            <button (click)="visualizzaAggiornaDati()" type="submit" class="btn btn-danger mb-5">Aggiorna i tuoi dati</button>
+            <app-modifica-info-atleta *ngIf="visualizzaModificatore"></app-modifica-info-atleta>
+        </div>  
+    </div>
+    <!--
+    <div>
+        <h1>Dati statistici personali</h1>
+    </div>
+    <div>
+        <h1>Eventi a cui ha partecipato</h1>
+    </div>
+    <div>
+        <h1>Eventi programmati</h1>
+    </div>
+
+    -->
+    </div>
+
+    <div class="container pt-1" style="max-width:1600px" *ngIf="user.tipoUser == 'ENTE'">
+        <div class="row">
+            <div class="col-12 text-center">
+                <h1 class="w3-xxxlarge mt-3"><b>{{user.nomeEnte}}</b></h1>
+            </div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-md-6 col-sm-12">
+                <img class="w3-image" [src]="dbImage" alt="User {{user.nomeEnte}}" width= 100% >
+                <div *ngIf="user.id == userId">
+                    <app-immagine></app-immagine>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <h3>Informazioni su {{user.nomeEnte}}</h3>
+                <p>{{user.informazioni}}</p>
+                <p><b>Orari di apertura: </b>{{user.orari}}</p>
+                <p><b>Contatto telefonico:</b> {{user.numeroTelefonico}}</p>
+                <p><b>Email:</b> {{user.email}}</p>
+                <p class="mb-3"><b>Indirizzo: </b>{{user.indirizzo}}</p>
+                <p *ngIf="user.sito"><a href="{{user.sito}}" target="_blank"> Clicca qui per visitare il sito!</a></p>
+                <button (click)="visualizzaAggiornaDati()" type="submit" class="btn btn-danger mb-3">Aggiorna i tuoi dati</button>
+                <app-modifica-info-ente *ngIf="visualizzaModificatore"></app-modifica-info-ente>
+                <app-map [coordinate]="coordinate" *ngIf="coordinate.lat !== 0 || coordinate.lng !== 0"></app-map>
+            </div >  
+        </div>
+    </div>

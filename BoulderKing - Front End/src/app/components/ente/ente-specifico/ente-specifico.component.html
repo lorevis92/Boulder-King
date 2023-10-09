@@ -1,0 +1,100 @@
+<div class="container pt-1" style="max-width:1600px">
+<div class="row">
+    <div class="col-12 text-center">
+        <h1 class="w3-xxxlarge mt-3 mb-3"><b>{{ente.nomeEnte}}</b></h1>
+   <!-- <h6>Benvenuti nella <span class="w3-tag">palestra {{ente.nomeEnte}}</span></h6>-->
+    </div>
+</div>
+<div class="row mt-3 mb-3">
+    
+    <div class="col-md-6 col-sm-12" *ngIf="ente.foto">
+        <img  class="w3-image" [src]="ente.foto" alt="Immagine {{ente.nomeEnte}}" width= 100% >
+    </div>
+    <div class="col-md-6 col-sm-12" *ngIf="!ente.foto">
+        <img class="w3-image" [src]="dbImage" alt="Ente {{ente.nomeEnte}}" width= 100% >
+    </div>
+    <div class="col-md-6 col-sm-12">
+        <h3>Informazioni su {{ente.nomeEnte}}</h3>
+        <p>{{ente.informazioni}}</p>
+        <div *ngIf="!ente.informazioni && userId">
+            <p (click)="mostraAggiungiInformazioni()" class="specialp"> Aggiungi informazioni sull'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiInformazioni">
+                <input type="informazioni" class="form-control" id="informazioni" name="informazioni" required [(ngModel)]="informazioni">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <p *ngIf="ente.orari"><b>Orari di apertura: </b>{{ente.orari}}</p>
+        <div *ngIf="!ente.orari && userId">
+            <p (click)="mostraAggiungiOrari()" class="specialp"> Aggiungi gli orari dell'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiOrari">
+                <input type="orari" class="form-control" id="orari" name="orari" required [(ngModel)]="orari">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <p *ngIf="ente.numeroTelefonico"><b>Contatto telefonico:</b> {{ente.numeroTelefonico}}</p>
+        <div *ngIf="!ente.numeroTelefonico && userId">
+            <p (click)="mostraAggiungiTelefono()" class="specialp"> Aggiungi il contatto telefonico dell'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiTelefono">
+                <input type="numeroTelefonico" class="form-control" id="numeroTelefonico" name="numeroTelefonico" required [(ngModel)]="numeroTelefonico">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <p *ngIf="ente.email"><b>Email:</b> {{ente.email}}</p>
+        <div *ngIf="!ente.email && userId">
+            <p (click)="mostraAggiungiEmail()" class="specialp"> Aggiungi l'email dell'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiEmail">
+                <input type="email" class="form-control" id="email" name="email" required [(ngModel)]="email">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <p *ngIf="ente.indirizzo"><b>Indirizzo: </b>{{ente.indirizzo}}</p>
+        <div *ngIf="!ente.indirizzo && userId">
+            <p (click)="mostraAggiungiIndirizzo()" class="specialp"> Aggiungi l'indirizzo dell'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiIndirizzo">
+                <input type="indirizzo" class="form-control" id="indirizzo" name="indirizzo" required [(ngModel)]="indirizzo">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <p *ngIf="ente.sito"><a href="{{ente.sito}}" target="_blank"> Clicca qui per visitare il sito!</a></p>
+        <div *ngIf="!ente.sito && userId">
+            <p (click)="mostraAggiungiSito()" class="specialp"> Aggiungi il sito dell'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiSito">
+                <input type="sito" class="form-control" id="sito" name="sito" required [(ngModel)]="sito">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <div *ngIf="!ente.latitudine && !ente.longitudine && userId">
+            <p (click)="mostraAggiungiCoordinate()" class="specialp" > Aggiungi le coordinate dell'arena</p>
+            <div class="mb-3" *ngIf="visionaAggiungiCoordinate">
+                <input type="latitudine" class="form-control" id="latitudine" name="latitudine" required [(ngModel)]="latitudine">
+                <input type="longitudine" class="form-control" id="longitudine" name="longitudine" required [(ngModel)]="longitudine">
+                <button (click)="aggiungiDati()" type="submit" class="btn btn-danger m-3">Aggiungi</button>
+            </div>
+        </div>
+        <app-map [coordinate]="coordinate"></app-map>
+    </div> 
+    <div class="row mt-3" *ngIf="eventi[0]">
+        <div class="col-12 d-flex justify-content-center">
+            <h3 class="w3-xxxlarge mt-3"><b>Battles sull'Arena {{ente.nomeEnte}}</b></h3>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12 h-100 rounded-5 d-flex justify-content-center" *ngFor="let evento of eventi">
+           
+                <a [routerLink]="['/evento/' + evento.id]">
+                    <div class="card mt-5" style="width: 18rem;">
+                        <img src="{{evento.immagineEvento}}" class="card-img-top"
+                            alt="Locandina {{ evento.nomeEvento }}" />
+                        <div class="card-body">
+                            <h5 class="card-title">{{ evento.nomeEvento }}</h5>
+                        </div>
+                    </div>
+                </a>
+        </div>
+    </div>  
+    
+</div>
+</div>
+
+
