@@ -71,7 +71,7 @@ export class ImmagineComponent implements OnInit {
         }
     },
     (error) => {
-      this.successResponse = 'Image not updated due to some error!';
+      this.successResponse = 'Errore durante l\'aggiornamento dell\'immagine!';
       this.errorToast.open();
       console.error('Errore durante l\'aggiornamento dell\'immagine:', error);
     });

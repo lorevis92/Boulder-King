@@ -15,7 +15,7 @@
             Ricerca le tue arene preferite tramite i nostri filtri personalizzati
           </button>
           <div class="dropdown-menu" aria-labelledby="filterDropdown">
-            <div class="text-center mb-3">
+            <div class="text-center mb-3 text-white">
               <input type="text" [(ngModel)]="nomeEnte" placeholder="Nome Ente" class="form-control" (keyup.enter)="personalizza()">
               <input type="text" [(ngModel)]="citta" placeholder="Città" class="form-control" (keyup.enter)="personalizza()">
               <input type="text" [(ngModel)]="provincia" placeholder="Provincia" class="form-control" (keyup.enter)="personalizza()">
@@ -23,7 +23,7 @@
               <input type="text" [(ngModel)]="tipoEnte" placeholder="Palestra/ Falesia" class="form-control" (keyup.enter)="personalizza()">
               <input type="text" [(ngModel)]="zonaItalia" placeholder="Nord/ Centro/ Sud" class="form-control" (keyup.enter)="personalizza()">
               
-              <button class="btn btn-primary" (click)="personalizza()">Personalizza</button>
+              <button class="btn btn-primary btnbr" (click)="personalizza()">Personalizza</button>
             </div>
           </div>
         </div>

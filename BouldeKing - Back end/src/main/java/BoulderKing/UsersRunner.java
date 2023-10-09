@@ -49,17 +49,18 @@ public class UsersRunner implements CommandLineRunner {
 //			usersRepo.save(user);
 //		}
 // CREAZIONE ATLETI PER RIEMPIRE IL DATABASE
-//		for (int i = 0; i < 15; i++) {
-//			String email = faker.internet().emailAddress();
-//			String password = "1234";
-//			String userName = faker.name().username();
-//			Integer posizioneClassifica = i + 1;
-//			String name = faker.name().firstName();
-//			String surname = faker.name().lastName();
+//			for (int i = 0; i < 15; i++) {
+//				String email = faker.internet().emailAddress();
+//				String password = "1234";
+//				String userName = faker.name().username();
+//				Integer posizioneClassifica = i + 1;
+//				String name = faker.name().firstName();
+//				String surname = faker.name().lastName();
 //
-//			User user = new User(email, password, name, surname, userName, posizioneClassifica);
-////			usersRepo.save(user);
-//		}
+//				User user = new User(email, password, name, surname, userName, posizioneClassifica);
+//				usersRepo.save(user);
+//				System.out.println("utente creato con successo" + user);
+//			}
 		
 			// this.mapServ.fetchClimbingGymsFromGoogleMaps();
 
